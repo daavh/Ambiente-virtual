@@ -166,21 +166,6 @@
             transform: scale(1.02);
         }
 
-        .btn-voltar {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: var(--azul-escuro);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-voltar:hover {
-            color: var(--azul-marinho);
-            transform: translateX(-5px);
-        }
-
         .mensagem-erro {
             color: #dc3545;
             font-size: 0.9rem;
@@ -288,7 +273,10 @@
             <button class="btn-login" onclick="fazerCadastro()">Criar conta</button>
         </div>
 
-        <a href="index.html" class="btn-voltar">← Voltar para o ambiente virtual</a>
+        <!-- BOTÃO SUPER SIMPLES - SÓ FUNCIONA PARA VOLTAR -->
+        <a href="Ambiente Virtual.html" style="display: block; text-align: center; margin-top: 20px; padding: 15px; background: #ebf5ff; color: #0a1929; text-decoration: none; border-radius: 40px; font-weight: bold;">
+            ← Voltar para Ambiente Virtual
+        </a>
     </div>
 
     <script>
@@ -390,7 +378,7 @@
                 localStorage.setItem('userEmail', email);
                 
                 alert('Login realizado com sucesso! Bem-vindo ao AGV ENEM 2026.');
-                window.location.href = 'index.html';
+                window.location.href = 'Ambiente Virtual.html';
             } else {
                 erroElement.textContent = 'Senha incorreta!';
                 erroElement.style.display = 'block';
