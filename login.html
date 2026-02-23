@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Cadastro - AGV ENEM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --azul-marinho: #0a1929;
+            --azul-escuro: #1a3a5f;
+            --azul-medio: #2b5a8c;
+            --azul-claro: #ebf5ff;
+            --branco-puro: #ffffff;
+            --sombra-media: 0 20px 40px -15px rgba(10, 25, 41, 0.3);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--azul-marinho), var(--azul-escuro));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 50px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: var(--sombra-media);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            color: var(--azul-marinho);
+        }
+
+        .logo h1 span {
+            color: var(--azul-medio);
+        }
+
+        .logo p {
+            color: var(--azul-escuro);
+            margin-top: 5px;
+        }
+
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: var(--azul-claro);
+            padding: 5px;
+            border-radius: 50px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--azul-marinho);
+        }
+
+        .tab.active {
+            background: var(--azul-marinho);
+            color: var(--branco-puro);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--azul-marinho);
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--azul-claro);
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--azul-medio);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(43, 90, 140, 0.1);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 30px;
+            margin-top: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--azul-marinho);
+        }
+
+        .periodo-info {
+            background: var(--azul-claro);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--azul-marinho);
+            border-left: 4px solid var(--azul-medio);
+        }
+
+        .email-obs {
+            font-size: 0.85rem;
+            color: var(--azul-escuro);
+            margin-top: 5px;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: var(--azul-marinho);
+            color: var(--branco-puro);
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-login:hover {
+            background: var(--azul-medio);
+            transform: scale(1.02);
+        }
+
+        .btn-voltar {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--azul-escuro);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-voltar:hover {
+            color: var(--azul-marinho);
+            transform: translateX(-5px);
+        }
+
+        .mensagem-erro {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>AGV <span>ENEM</span></h1>
+            <p>Colégio Alberto Gomes Veiga</p>
+        </div>
+
+        <div class="tab-container">
+            <button class="tab active" onclick="showLogin()">Entrar</button>
+            <button class="tab" onclick="showCadastro()">Cadastrar</button>
+        </div>
+
+        <!-- Formulário de Login -->
+        <div id="login-form">
+            <div class="form-group">
+                <label>E-mail institucional</label>
+                <input type="email" id="login-email" placeholder="seu.nome@escola.pr.gov.br">
+                <div class="email-obs">Use seu e-mail @escola.pr.gov.br</div>
+            </div>
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" id="login-senha" placeholder="••••••••">
+            </div>
+            <div class="mensagem-erro" id="login-erro">E-mail ou senha incorretos!</div>
+            <button class="btn-login" onclick="fazerLogin()">Entrar na plataforma</button>
+        </div>
+
+        <!-- Formulário de Cadastro -->
+        <div id="cadastro-form" style="display: none;">
+            <div class="form-group">
+                <label>Nome completo</label>
+                <input type="text" id="cadastro-nome" placeholder="Digite seu nome">
+            </div>
+            
+            <div class="form-group">
+                <label>E-mail institucional</label>
+                <input type="email" id="cadastro-email" placeholder="seu.nome@escola.pr.gov.br">
+                <div class="email-obs">O e-mail deve terminar com @escola.pr.gov.br</div>
+            </div>
+
+            <!-- Pergunta se é técnico -->
+            <div class="form-group">
+                <label>Você é aluno de curso técnico?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="tecnico" id="tecnico-sim" value="sim" onclick="mostrarTurmasTecnico()">
+                        <label for="tecnico-sim">Sim</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="tecnico" id="tecnico-nao" value="nao" onclick="mostrarTurmasRegulares()" checked>
+                        <label for="tecnico-nao">Não</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informação de período (dinâmica) -->
+            <div class="periodo-info" id="periodo-info">
+                🕐 Turmas regulares - Período da TARDE
+            </div>
+
+            <!-- Seleção de Série -->
+            <div class="form-group">
+                <label>Série</label>
+                <select id="cadastro-serie" onchange="atualizarTurmas()">
+                    <option value="">Selecione sua série</option>
+                    <option value="1ano">1º Ano</option>
+                    <option value="2ano">2º Ano</option>
+                    <option value="3ano">3º Ano</option>
+                </select>
+            </div>
+
+            <!-- Seleção de Turma (dinâmica) -->
+            <div class="form-group">
+                <label>Turma</label>
+                <select id="cadastro-turma">
+                    <option value="">Selecione sua turma</option>
+                    <!-- Opções serão preenchidas via JavaScript -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" id="cadastro-senha" placeholder="Crie uma senha">
+            </div>
+            <div class="form-group">
+                <label>Confirmar senha</label>
+                <input type="password" id="cadastro-confirmar" placeholder="Digite a senha novamente">
+            </div>
+            
+            <div class="mensagem-erro" id="cadastro-erro"></div>
+            <button class="btn-login" onclick="fazerCadastro()">Criar conta</button>
+        </div>
+
+        <a href="index.html" class="btn-voltar">← Voltar para o ambiente virtual</a>
+    </div>
+
+    <script>
+        // Estado atual
+        let isTecnico = false;
+        let serieSelecionada = '';
+
+        function showLogin() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('cadastro-form').style.display = 'none';
+            document.querySelectorAll('.tab')[0].classList.add('active');
+            document.querySelectorAll('.tab')[1].classList.remove('active');
+            document.getElementById('login-erro').style.display = 'none';
+        }
+
+        function showCadastro() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('cadastro-form').style.display = 'block';
+            document.querySelectorAll('.tab')[0].classList.remove('active');
+            document.querySelectorAll('.tab')[1].classList.add('active');
+            document.getElementById('cadastro-erro').style.display = 'none';
+            
+            // Inicializar com turmas regulares (padrão)
+            mostrarTurmasRegulares();
+        }
+
+        function mostrarTurmasTecnico() {
+            isTecnico = true;
+            document.getElementById('periodo-info').innerHTML = '🕐 Cursos técnicos - Período da MANHÃ (DS, BIO, ADM, PORTOS)';
+            document.getElementById('periodo-info').style.borderLeftColor = '#2b5a8c';
+            atualizarTurmas();
+        }
+
+        function mostrarTurmasRegulares() {
+            isTecnico = false;
+            document.getElementById('periodo-info').innerHTML = '🕐 Turmas regulares - Período da TARDE (A, B, C)';
+            document.getElementById('periodo-info').style.borderLeftColor = '#2b5a8c';
+            atualizarTurmas();
+        }
+
+        function atualizarTurmas() {
+            const serieSelect = document.getElementById('cadastro-serie');
+            const turmaSelect = document.getElementById('cadastro-turma');
+            const serie = serieSelect.value;
+            
+            serieSelecionada = serie;
+            
+            // Limpar opções atuais
+            turmaSelect.innerHTML = '<option value="">Selecione sua turma</option>';
+            
+            if (!serie) return;
+            
+            const ano = serie.replace('ano', '');
+            
+            if (isTecnico) {
+                // Turmas técnicas - MANHÃ
+                const tecnicos = ['DS', 'BIO', 'ADM', 'PORTOS'];
+                tecnicos.forEach(curso => {
+                    const option = document.createElement('option');
+                    option.value = `${ano}${curso}`;
+                    option.textContent = `${ano}º ${curso} (Manhã)`;
+                    turmaSelect.appendChild(option);
+                });
+            } else {
+                // Turmas regulares - TARDE
+                const letras = ['A', 'B', 'C'];
+                letras.forEach(letra => {
+                    const option = document.createElement('option');
+                    option.value = `${ano}${letra}`;
+                    option.textContent = `${ano}º Ano ${letra} (Tarde)`;
+                    turmaSelect.appendChild(option);
+                });
+            }
+        }
+
+        function validarEmailEscola(email) {
+            return email.toLowerCase().endsWith('@escola.pr.gov.br');
+        }
+
+        function fazerLogin() {
+            const email = document.getElementById('login-email').value;
+            const senha = document.getElementById('login-senha').value;
+            const erroElement = document.getElementById('login-erro');
+
+            if (!email || !senha) {
+                erroElement.textContent = 'Preencha todos os campos!';
+                erroElement.style.display = 'block';
+                return;
+            }
+
+            if (!validarEmailEscola(email)) {
+                erroElement.textContent = 'Use um e-mail institucional @escola.pr.gov.br';
+                erroElement.style.display = 'block';
+                return;
+            }
+
+            if (senha.length >= 3) {
+                localStorage.setItem('usuarioLogado', 'true');
+                localStorage.setItem('userEmail', email);
+                
+                alert('Login realizado com sucesso! Bem-vindo ao AGV ENEM 2026.');
+                window.location.href = 'index.html';
+            } else {
+                erroElement.textContent = 'Senha incorreta!';
+                erroElement.style.display = 'block';
+            }
+        }
+
+        function fazerCadastro() {
+            const nome = document.getElementById('cadastro-nome').value;
+            const email = document.getElementById('cadastro-email').value;
+            const serie = document.getElementById('cadastro-serie').value;
+            const turma = document.getElementById('cadastro-turma').value;
+            const senha = document.getElementById('cadastro-senha').value;
+            const confirmar = document.getElementById('cadastro-confirmar').value;
+            const tecnicoSim = document.getElementById('tecnico-sim').checked;
+            const erroElement = document.getElementById('cadastro-erro');
+
+            // Validações
+            if (!nome || !email || !serie || !turma || !senha || !confirmar) {
+                erroElement.textContent = 'Preencha todos os campos!';
+                erroElement.style.display = 'block';
+                return;
+            }
+
+            if (!validarEmailEscola(email)) {
+                erroElement.textContent = 'Use um e-mail institucional @escola.pr.gov.br';
+                erroElement.style.display = 'block';
+                return;
+            }
+
+            if (senha.length < 3) {
+                erroElement.textContent = 'A senha deve ter pelo menos 3 caracteres';
+                erroElement.style.display = 'block';
+                return;
+            }
+
+            if (senha !== confirmar) {
+                erroElement.textContent = 'As senhas não coincidem!';
+                erroElement.style.display = 'block';
+                return;
+            }
+
+            // Determinar período baseado na escolha
+            const periodo = tecnicoSim ? 'Manhã' : 'Tarde';
+            
+            // Simulação de cadastro bem-sucedido
+            alert(`Cadastro realizado com sucesso, ${nome}!\nSérie: ${serie}\nTurma: ${turma} (${periodo})\nFaça login para continuar.`);
+            
+            // Limpa os campos
+            document.getElementById('cadastro-nome').value = '';
+            document.getElementById('cadastro-email').value = '';
+            document.getElementById('cadastro-serie').value = '';
+            document.getElementById('cadastro-turma').innerHTML = '<option value="">Selecione sua turma</option>';
+            document.getElementById('cadastro-senha').value = '';
+            document.getElementById('cadastro-confirmar').value = '';
+            document.getElementById('tecnico-nao').checked = true;
+            
+            // Volta para a tela de login
+            showLogin();
+        }
+    </script>
+</body>
+</html>
