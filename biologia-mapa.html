@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Mental - Biologia - AGV ENEM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --azul-marinho: #0a1929;
+            --azul-escuro: #1a3a5f;
+            --azul-medio: #2b5a8c;
+            --azul-claro: #ebf5ff;
+            --branco-puro: #ffffff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--azul-marinho), var(--azul-escuro));
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: var(--branco-puro);
+        }
+
+        .header h1 span {
+            color: #ffd700;
+        }
+
+        .btn-voltar {
+            background: var(--azul-claro);
+            color: var(--azul-marinho);
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: var(--branco-puro);
+            transform: scale(1.05);
+        }
+
+        .mapa-container {
+            background: var(--branco-puro);
+            border-radius: 40px;
+            padding: 40px;
+        }
+
+        .mapa-titulo {
+            text-align: center;
+            color: var(--azul-marinho);
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .mapa-central {
+            width: 150px;
+            height: 150px;
+            background: var(--azul-marinho);
+            color: var(--branco-puro);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .topicos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .topico {
+            background: var(--azul-claro);
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        .topico h3 {
+            color: var(--azul-marinho);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--azul-medio);
+            padding-bottom: 10px;
+        }
+
+        .subtopico {
+            margin-bottom: 20px;
+        }
+
+        .subtopico h4 {
+            color: var(--azul-escuro);
+            margin-bottom: 10px;
+        }
+
+        .subtopico ul {
+            list-style: none;
+            padding-left: 15px;
+        }
+
+        .subtopico li {
+            margin-bottom: 8px;
+            color: #444;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .subtopico li::before {
+            content: '•';
+            color: var(--azul-medio);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AGV <span>ENEM</span> - Mapa Mental: Biologia</h1>
+            <a href="../Ambiente Virtual.html" class="btn-voltar">← Voltar</a>
+        </div>
+
+        <div class="mapa-container">
+            <div class="mapa-titulo">🧬 BIOLOGIA ENEM</div>
+
+            <div class="mapa-central">
+                BIOLOGIA<br>45 QUESTÕES
+            </div>
+
+            <div class="topicos-grid">
+                <div class="topico">
+                    <h3>🧬 GENÉTICA</h3>
+                    <ul>
+                        <li>DNA e RNA</li>
+                        <li>Leis de Mendel</li>
+                        <li>Dominante e recessivo</li>
+                        <li>Cruzamentos</li>
+                    </ul>
+                </div>
+
+                <div class="topico">
+                    <h3>🌿 ECOLOGIA</h3>
+                    <ul>
+                        <li>Cadeia alimentar</li>
+                        <li>Biomas brasileiros</li>
+                        <li>Relações ecológicas</li>
+                        <li>Ciclos biogeoquímicos</li>
+                    </ul>
+                </div>
+
+                <div class="topico">
+                    <h3>🧠 FISIOLOGIA</h3>
+                    <ul>
+                        <li>Sistema digestório</li>
+                        <li>Sistema respiratório</li>
+                        <li>Sistema circulatório</li>
+                        <li>Sistema nervoso</li>
+                    </ul>
+                </div>
+
+                <div class="topico">
+                    <h3>🔬 CITOLOGIA</h3>
+                    <ul>
+                        <li>Célula animal</li>
+                        <li>Célula vegetal</li>
+                        <li>Organelas</li>
+                        <li>Mitose e meiose</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // VERIFICAÇÃO DE LOGIN
+        window.onload = function() {
+            const logado = localStorage.getItem('usuarioLogado');
+            if (logado !== 'true') {
+                window.location.href = '../login.html';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Mental - Geografia - AGV ENEM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --azul-marinho: #0a1929;
+            --azul-escuro: #1a3a5f;
+            --azul-medio: #2b5a8c;
+            --azul-claro: #ebf5ff;
+            --branco-puro: #ffffff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--azul-marinho), var(--azul-escuro));
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: var(--branco-puro);
+        }
+
+        .header h1 span {
+            color: #ffd700;
+        }
+
+        .btn-voltar {
+            background: var(--azul-claro);
+            color: var(--azul-marinho);
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: var(--branco-puro);
+            transform: scale(1.05);
+        }
+
+        .mapa-container {
+            background: var(--branco-puro);
+            border-radius: 40px;
+            padding: 40px;
+        }
+
+        .mapa-titulo {
+            text-align: center;
+            color: var(--azul-marinho);
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .mapa-central {
+            width: 150px;
+            height: 150px;
+            background: var(--azul-marinho);
+            color: var(--branco-puro);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .topicos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .topico {
+            background: var(--azul-claro);
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        .topico h3 {
+            color: var(--azul-marinho);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--azul-medio);
+            padding-bottom: 10px;
+        }
+
+        .topico ul {
+            list-style: none;
+        }
+
+        .topico li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .topico li::before {
+            content: '•';
+            color: var(--azul-medio);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AGV <span>ENEM</span> - Mapa Mental: Geografia</h1>
+            <a href="../Ambiente Virtual.html" class="btn-voltar">← Voltar</a>
+        </div>
+
+        <div class="mapa-container">
+            <div class="mapa-titulo">🗺️ GEOGRAFIA ENEM</div>
+
+            <div class="mapa-central">
+                GEOGRAFIA<br>45 QUESTÕES
+            </div>
+
+            <div class="topicos-grid">
+                <div class="topico">
+                    <h3>🌍 GEOGRAFIA FÍSICA</h3>
+                    <ul>
+                        <li>Climas do Brasil</li>
+                        <li>Relevo</li>
+                        <li>Hidrografia</li>
+                        <li>Biomas brasileiros</li>
+                        <li>Fusos horários</li>
+                    </ul>
+                </div>
+
+                <div class="topico">
+                    <h3>📊 GEOGRAFIA HUMANA</h3>
+                    <ul>
+                        <li>População</li>
+                        <li>Migrações</li>
+                        <li>Urbanização</li>
+                        <li>Industrialização</li>
+                        <li>Agricultura</li>
+                    </ul>
+                </div>
+
+                <div class="topico">
+                    <h3>🌎 GEOPOLÍTICA</h3>
+                    <ul>
+                        <li>Globalização</li>
+                        <li>Blocos econômicos</li>
+                        <li>Conflitos mundiais</li>
+                        <li>Questões ambientais</li>
+                    </ul>
+                </div>
+
+                <div class="topico">
+                    <h3>🗺️ CARTOGRAFIA</h3>
+                    <ul>
+                        <li>Escalas</li>
+                        <li>Coordenadas</li>
+                        <li>Projeções</li>
+                        <li>Mapas temáticos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // VERIFICAÇÃO DE LOGIN
+        window.onload = function() {
+            const logado = localStorage.getItem('usuarioLogado');
+            if (logado !== 'true') {
+                window.location.href = '../login.html';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Redação - AGV ENEM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --azul-marinho: #0a1929;
+            --azul-escuro: #1a3a5f;
+            --azul-medio: #2b5a8c;
+            --azul-claro: #ebf5ff;
+            --branco-puro: #ffffff;
+            --sombra-media: 0 20px 40px -15px rgba(10, 25, 41, 0.3);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--azul-marinho), var(--azul-escuro));
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: var(--branco-puro);
+            font-size: 1.8rem;
+        }
+
+        .header h1 span {
+            color: #ffd700;
+        }
+
+        .btn-voltar {
+            background: var(--azul-claro);
+            color: var(--azul-marinho);
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: var(--branco-puro);
+            transform: scale(1.05);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: var(--sombra-media);
+        }
+
+        .card h2 {
+            color: var(--azul-marinho);
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--azul-marinho);
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--azul-claro);
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--azul-medio);
+            outline: none;
+        }
+
+        .upload-area {
+            border: 3px dashed var(--azul-medio);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--azul-claro);
+        }
+
+        .upload-area:hover {
+            background: #d0e2ff;
+            border-color: var(--azul-marinho);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .btn-enviar {
+            background: var(--azul-marinho);
+            color: var(--branco-puro);
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn-enviar:hover {
+            background: var(--azul-medio);
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AGV <span>ENEM</span> - Enviar Redação</h1>
+            <a href="../Ambiente Virtual.html" class="btn-voltar">← Voltar</a>
+        </div>
+
+        <div class="card">
+            <h2>📝 Envie sua redação</h2>
+            
+            <div class="form-group">
+                <label>Tema da redação</label>
+                <select id="tema">
+                    <option>Desafios da inclusão digital no Brasil</option>
+                    <option>Inteligência Artificial e o futuro do trabalho</option>
+                    <option>Sustentabilidade e consumo consciente</option>
+                    <option>Saúde mental dos jovens brasileiros</option>
+                    <option>Valorização da cultura brasileira</option>
+                    <option>Desigualdade social no acesso à educação</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Seu nome completo</label>
+                <input type="text" id="nome" placeholder="Digite seu nome">
+            </div>
+
+            <div class="form-group">
+                <label>Série</label>
+                <select id="serie">
+                    <option>1º Ano</option>
+                    <option>2º Ano</option>
+                    <option>3º Ano</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Turma</label>
+                <input type="text" id="turma" placeholder="Ex: 301, 1DS, 2BIO">
+            </div>
+
+            <div class="upload-area" onclick="document.getElementById('arquivo').click()">
+                <div class="upload-icon">📎</div>
+                <h3>Clique para fazer upload</h3>
+                <p>Arraste ou selecione seu arquivo (PDF, DOC, DOCX)</p>
+                <input type="file" id="arquivo" style="display: none;" accept=".pdf,.doc,.docx">
+            </div>
+
+            <div class="form-group">
+                <label>Observações (opcional)</label>
+                <textarea rows="4" placeholder="Alguma dúvida específica?"></textarea>
+            </div>
+
+            <button class="btn-enviar" onclick="enviarRedacao()">📨 Enviar para correção</button>
+        </div>
+    </div>
+
+    <script>
+        function enviarRedacao() {
+            alert('Redação enviada com sucesso! Você receberá a correção em até 24 horas.');
+            window.location.href = '../Ambiente Virtual.html';
+        }
+
+        document.querySelector('.upload-area').addEventListener('click', function() {
+            document.getElementById('arquivo').click();
+        });
+    </script>
+</body>
+</html>

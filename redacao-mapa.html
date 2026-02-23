@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Mental - Redação - AGV ENEM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --azul-marinho: #0a1929;
+            --azul-escuro: #1a3a5f;
+            --azul-medio: #2b5a8c;
+            --azul-claro: #ebf5ff;
+            --branco-puro: #ffffff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--azul-marinho), var(--azul-escuro));
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: var(--branco-puro);
+        }
+
+        .header h1 span {
+            color: #ffd700;
+        }
+
+        .btn-voltar {
+            background: var(--azul-claro);
+            color: var(--azul-marinho);
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: var(--branco-puro);
+            transform: scale(1.05);
+        }
+
+        .mapa-container {
+            background: var(--branco-puro);
+            border-radius: 40px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mapa-titulo {
+            text-align: center;
+            color: var(--azul-marinho);
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .mapa-central {
+            width: 150px;
+            height: 150px;
+            background: var(--azul-marinho);
+            color: var(--branco-puro);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .ramos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            position: relative;
+        }
+
+        .ramo {
+            background: var(--azul-claro);
+            border-radius: 20px;
+            padding: 25px;
+            border-top: 5px solid var(--azul-medio);
+        }
+
+        .ramo h3 {
+            color: var(--azul-marinho);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .ramo ul {
+            list-style: none;
+        }
+
+        .ramo li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            color: var(--azul-escuro);
+        }
+
+        .ramo li::before {
+            content: '•';
+            color: var(--azul-medio);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AGV <span>ENEM</span> - Mapa Mental: Redação</h1>
+            <a href="../Ambiente Virtual.html" class="btn-voltar">← Voltar</a>
+        </div>
+
+        <div class="mapa-container">
+            <div class="mapa-titulo">🗺️ REDAÇÃO ENEM</div>
+            
+            <div class="mapa-central">
+                REDAÇÃO<br>NOTA 1000
+            </div>
+
+            <div class="ramos-grid">
+                <div class="ramo">
+                    <h3>📝 ESTRUTURA</h3>
+                    <ul>
+                        <li>Introdução (1 parágrafo)</li>
+                        <li>Desenvolvimento (2 parágrafos)</li>
+                        <li>Conclusão (1 parágrafo)</li>
+                        <li>4 a 5 parágrafos no total</li>
+                        <li>7 a 30 linhas</li>
+                    </ul>
+                </div>
+
+                <div class="ramo">
+                    <h3>🎯 COMPETÊNCIAS</h3>
+                    <ul>
+                        <li>C1: Norma culta</li>
+                        <li>C2: Tema proposto</li>
+                        <li>C3: Argumentação</li>
+                        <li>C4: Conectivos</li>
+                        <li>C5: Intervenção</li>
+                    </ul>
+                </div>
+
+                <div class="ramo">
+                    <h3>💡 REPERTÓRIO</h3>
+                    <ul>
+                        <li>Filmes e livros</li>
+                        <li>Filósofos</li>
+                        <li>Dados históricos</li>
+                        <li>Notícias atuais</li>
+                        <li>Constituição</li>
+                    </ul>
+                </div>
+
+                <div class="ramo">
+                    <h3>⚡ ERROS COMUNS</h3>
+                    <ul>
+                        <li>Fugir do tema</li>
+                        <li>Proposta genérica</li>
+                        <li>Conectivos errados</li>
+                        <li>Letra ilegível</li>
+                        <li>Clichês</li>
+                    </ul>
+                </div>
+
+                <div class="ramo">
+                    <h3>📚 TEMAS FREQUENTES</h3>
+                    <ul>
+                        <li>Educação</li>
+                        <li>Saúde</li>
+                        <li>Meio ambiente</li>
+                        <li>Tecnologia</li>
+                        <li>Desigualdade</li>
+                    </ul>
+                </div>
+
+                <div class="ramo">
+                    <h3>✅ CHECKLIST</h3>
+                    <ul>
+                        <li>Li o tema com atenção?</li>
+                        <li>Tenho 4 parágrafos?</li>
+                        <li>Usei conectivos?</li>
+                        <li>Proposta detalhada?</li>
+                        <li>Revisei os erros?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // VERIFICAÇÃO DE LOGIN - Garante que apenas usuários logados acessem
+        window.onload = function() {
+            const logado = localStorage.getItem('usuarioLogado');
+            if (logado !== 'true') {
+                // Se não estiver logado, redireciona para o login
+                window.location.href = '../login.html';
+            }
+        };
+
+        // Função adicional para garantir que o botão voltar funcione
+        document.querySelector('.btn-voltar').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = '../Ambiente Virtual.html';
+        });
+    </script>
+</body>
+</html>

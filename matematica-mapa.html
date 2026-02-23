@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Mental - Matemática - AGV ENEM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --azul-marinho: #0a1929;
+            --azul-escuro: #1a3a5f;
+            --azul-medio: #2b5a8c;
+            --azul-claro: #ebf5ff;
+            --branco-puro: #ffffff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--azul-marinho), var(--azul-escuro));
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: var(--branco-puro);
+        }
+
+        .header h1 span {
+            color: #ffd700;
+        }
+
+        .btn-voltar {
+            background: var(--azul-claro);
+            color: var(--azul-marinho);
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: var(--branco-puro);
+            transform: scale(1.05);
+        }
+
+        .mapa-container {
+            background: var(--branco-puro);
+            border-radius: 40px;
+            padding: 40px;
+        }
+
+        .mapa-titulo {
+            text-align: center;
+            color: var(--azul-marinho);
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .mapa-central {
+            width: 150px;
+            height: 150px;
+            background: var(--azul-marinho);
+            color: var(--branco-puro);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .topicos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .topico {
+            background: var(--azul-claro);
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        .topico h3 {
+            color: var(--azul-marinho);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--azul-medio);
+            padding-bottom: 10px;
+        }
+
+        .subtopico {
+            margin-bottom: 20px;
+        }
+
+        .subtopico h4 {
+            color: var(--azul-escuro);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .subtopico ul {
+            list-style: none;
+            padding-left: 15px;
+        }
+
+        .subtopico li {
+            margin-bottom: 8px;
+            color: #444;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .subtopico li::before {
+            content: '•';
+            color: var(--azul-medio);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .formula {
+            background: var(--branco-puro);
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            border: 1px solid var(--azul-medio);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AGV <span>ENEM</span> - Mapa Mental: Matemática</h1>
+            <a href="../Ambiente Virtual.html" class="btn-voltar">← Voltar</a>
+        </div>
+
+        <div class="mapa-container">
+            <div class="mapa-titulo">🧮 MATEMÁTICA ENEM</div>
+
+            <div class="mapa-central">
+                MATEMÁTICA<br>45 QUESTÕES
+            </div>
+
+            <div class="topicos-grid">
+                <div class="topico">
+                    <h3>📊 ESTATÍSTICA</h3>
+                    <div class="subtopico">
+                        <h4>Medidas</h4>
+                        <ul>
+                            <li>Média = soma/n</li>
+                            <li>Mediana: valor central</li>
+                            <li>Moda: valor mais frequente</li>
+                            <li>Variância e desvio</li>
+                        </ul>
+                    </div>
+                    <div class="subtopico">
+                        <h4>Gráficos</h4>
+                        <ul>
+                            <li>Barras e colunas</li>
+                            <li>Setores (pizza)</li>
+                            <li>Linhas (evolução)</li>
+                            <li>Histograma</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topico">
+                    <h3>📐 GEOMETRIA</h3>
+                    <div class="subtopico">
+                        <h4>Fórmulas</h4>
+                        <div class="formula">Área quadrado: L²</div>
+                        <div class="formula">Área círculo: πR²</div>
+                        <div class="formula">Volume cubo: a³</div>
+                        <div class="formula">Teorema de Pitágoras: a² = b² + c²</div>
+                    </div>
+                </div>
+
+                <div class="topico">
+                    <h3>🔢 FUNÇÕES</h3>
+                    <div class="subtopico">
+                        <h4>Tipos</h4>
+                        <ul>
+                            <li>1º grau: f(x) = ax + b</li>
+                            <li>2º grau: f(x) = ax² + bx + c</li>
+                            <li>Exponencial: f(x) = aˣ</li>
+                            <li>Logarítmica: f(x) = log x</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topico">
+                    <h3>💰 MATEMÁTICA FINANCEIRA</h3>
+                    <div class="subtopico">
+                        <h4>Conceitos</h4>
+                        <ul>
+                            <li>Juros simples: J = C·i·t</li>
+                            <li>Juros compostos: M = C(1+i)ᵗ</li>
+                            <li>Desconto</li>
+                            <li>Inflação</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // VERIFICAÇÃO DE LOGIN
+        window.onload = function() {
+            const logado = localStorage.getItem('usuarioLogado');
+            if (logado !== 'true') {
+                window.location.href = '../login.html';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temas de Redação 2026 - AGV ENEM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --azul-marinho: #0a1929;
+            --azul-escuro: #1a3a5f;
+            --azul-medio: #2b5a8c;
+            --azul-claro: #ebf5ff;
+            --branco-puro: #ffffff;
+            --sombra-media: 0 20px 40px -15px rgba(10, 25, 41, 0.3);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--azul-marinho), var(--azul-escuro));
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: var(--branco-puro);
+            font-size: 1.8rem;
+        }
+
+        .header h1 span {
+            color: #ffd700;
+        }
+
+        .btn-voltar {
+            background: var(--azul-claro);
+            color: var(--azul-marinho);
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .temas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .tema-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 30px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border-left: 5px solid var(--azul-medio);
+        }
+
+        .tema-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-media);
+        }
+
+        .tema-card h3 {
+            color: var(--azul-marinho);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .tema-card p {
+            color: var(--azul-escuro);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .tema-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--azul-claro);
+            color: var(--azul-marinho);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .btn-praticar {
+            background: var(--azul-marinho);
+            color: var(--branco-puro);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AGV <span>ENEM</span> - Temas 2026</h1>
+            <a href="../Ambiente Virtual.html" class="btn-voltar">← Voltar</a>
+        </div>
+
+        <div class="temas-grid">
+            <div class="tema-card" onclick="window.location.href='enviar.html'">
+                <h3>📱 Desafios da inclusão digital no Brasil</h3>
+                <p>A exclusão digital afeta milhões de brasileiros. Como garantir acesso à tecnologia para todos?</p>
+                <div class="tema-tags">
+                    <span class="tag">Sociedade</span>
+                    <span class="tag">Tecnologia</span>
+                </div>
+                <button class="btn-praticar">Praticar este tema</button>
+            </div>
+
+            <div class="tema-card" onclick="window.location.href='enviar.html'">
+                <h3>🤖 Inteligência Artificial e o futuro do trabalho</h3>
+                <p>Com o avanço da IA, muitas profissões podem desaparecer. Como se preparar?</p>
+                <div class="tema-tags">
+                    <span class="tag">Tecnologia</span>
+                    <span class="tag">Trabalho</span>
+                </div>
+                <button class="btn-praticar">Praticar este tema</button>
+            </div>
+
+            <div class="tema-card" onclick="window.location.href='enviar.html'">
+                <h3>🌱 Sustentabilidade e consumo consciente</h3>
+                <p>O consumo excessivo ameaça o planeta. Como promover hábitos sustentáveis?</p>
+                <div class="tema-tags">
+                    <span class="tag">Meio Ambiente</span>
+                    <span class="tag">Sociedade</span>
+                </div>
+                <button class="btn-praticar">Praticar este tema</button>
+            </div>
+
+            <div class="tema-card" onclick="window.location.href='enviar.html'">
+                <h3>🧠 Saúde mental dos jovens brasileiros</h3>
+                <p>Ansiedade e depressão são cada vez mais comuns. Como escolas e família podem ajudar?</p>
+                <div class="tema-tags">
+                    <span class="tag">Saúde</span>
+                    <span class="tag">Juventude</span>
+                </div>
+                <button class="btn-praticar">Praticar este tema</button>
+            </div>
+
+            <div class="tema-card" onclick="window.location.href='enviar.html'">
+                <h3>🎭 Valorização da cultura brasileira</h3>
+                <p>A cultura brasileira é rica mas pouco valorizada. Como preservá-la?</p>
+                <div class="tema-tags">
+                    <span class="tag">Cultura</span>
+                    <span class="tag">Identidade</span>
+                </div>
+                <button class="btn-praticar">Praticar este tema</button>
+            </div>
+
+            <div class="tema-card" onclick="window.location.href='enviar.html'">
+                <h3>📚 Desigualdade social no acesso à educação</h3>
+                <p>A qualidade do ensino ainda é muito desigual no Brasil. Quais políticas podem mudar isso?</p>
+                <div class="tema-tags">
+                    <span class="tag">Educação</span>
+                    <span class="tag">Desigualdade</span>
+                </div>
+                <button class="btn-praticar">Praticar este tema</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
