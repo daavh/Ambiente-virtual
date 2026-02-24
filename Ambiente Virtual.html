@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>AGV ENEM 2026 - Colégio Alberto Gomes Veiga</title>
+    <title>AGV ENEM 2026 - Colégio Alberto Gomes Veiga - Paranaguá</title>
     <style>
         * {
             margin: 0;
@@ -132,7 +132,7 @@
             100% { transform: scale(1); }
         }
 
-        /* Botão de Login */
+        /* Botão de Login/Logout */
         .btn-login {
             background: var(--branco-puro);
             color: var(--azul-marinho);
@@ -155,6 +155,26 @@
             transform: scale(1.05);
             background: var(--azul-claro);
             box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-logout {
+            background: #dc3545;
+            color: var(--branco-puro);
+            border: none;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transicao);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-logout:hover {
+            background: #c82333;
+            transform: scale(1.05);
         }
 
         /* Navegação com efeito de vidro */
@@ -325,8 +345,6 @@
             transform: scale(1.05) translateY(-2px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
-
-        /* Botões do carrossel removidos */
 
         /* Mensagem de login necessário */
         .login-required {
@@ -706,7 +724,7 @@
             50% { transform: translateY(-20px); }
         }
 
-        /* Provas anteriores */
+        /* PROVAS ANTERIORES - CORRIGIDO com links funcionando */
         .provas-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -737,6 +755,29 @@
             font-weight: 800;
             color: var(--azul-marinho);
             margin-bottom: 5px;
+        }
+
+        .prova-info {
+            font-size: 0.8rem;
+            color: var(--azul-escuro);
+            margin: 5px 0;
+        }
+
+        .link-todas-provas {
+            display: inline-block;
+            background: var(--azul-marinho);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 20px 0;
+        }
+
+        .link-todas-provas:hover {
+            background: var(--azul-medio);
+            transform: scale(1.05);
         }
 
         /* Mapas mentais com efeito de vidro */
@@ -978,6 +1019,10 @@
             .mapas-grid {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
+            
+            .provas-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
         }
 
         /* Animações extras */
@@ -1024,9 +1069,11 @@
             </div>
             <div class="header-right">
                 <div class="ano-letivo">2026</div>
-                <button class="btn-login" onclick="window.location.href='login.html'">
-                    <span>🔑</span> Entrar / Cadastrar
-                </button>
+                <div id="loginButtonContainer">
+                    <button class="btn-login" onclick="window.location.href='login.html'">
+                        <span>🔑</span> Entrar / Cadastrar
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -1050,7 +1097,7 @@
                 <div class="carousel-slide">
                     <div class="slide-content">
                         <h2>ENEM 2026</h2>
-                        <p>Preparação completa para 1º, 2º e 3º ano do Ensino Médio</p>
+                        <p>Preparação completa para alunos de Paranaguá</p>
                         <button class="slide-btn" onclick="verificarLogin(event, '#materias')">Começar agora</button>
                     </div>
                 </div>
@@ -1069,7 +1116,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Botões removidos completamente -->
         </div>
 
         <!-- TODO O CONTEÚDO (inicialmente oculto) -->
@@ -1176,94 +1222,109 @@
                         </div>
 
                         <div class="redacao-buttons">
-                            <button class="btn btn-primary" onclick="window.open('#', '_blank')">Enviar redação</button>
-                            <button class="btn btn-secondary" onclick="window.open('#', '_blank')">Temas 2026</button>
-                            <button class="btn btn-secondary" onclick="window.open('#', '_blank')">Dicas</button>
+                            <button class="btn btn-primary" onclick="verificarEAbrirLink('redacao/enviar.html')">Enviar redação</button>
+                            <button class="btn btn-secondary" onclick="verificarEAbrirLink('redacao/temas-2026.html')">Temas 2026</button>
+                            <button class="btn btn-secondary" onclick="verificarEAbrirLink('redacao/dicas-redacao.html')">Dicas</button>
                         </div>
                     </div>
                     <div class="redacao-image">✍️</div>
                 </div>
             </section>
 
-            <!-- Provas anteriores -->
-            <h2 class="section-title" id="provas">Provas anteriores</h2>
+            <!-- PROVAS ANTERIORES - CORRIGIDO com links funcionando -->
+            <h2 class="section-title" id="provas">Provas anteriores ENEM</h2>
             <div class="provas-grid">
-                <div class="prova-card" onclick="window.open('https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas', '_blank')">
+                <div class="prova-card" onclick="window.open('https://cursoenemgratuito.com.br/download-das-provas-do-enem/', '_blank')">
                     <div class="prova-ano">2024</div>
-                    <small>PDF + Gabarito</small>
+                    <div class="prova-info">📥 PDF + Gabarito</div>
+                    <small>Curso Enem Gratuito</small>
                 </div>
-                <div class="prova-card" onclick="window.open('https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas', '_blank')">
+                <div class="prova-card" onclick="window.open('https://cursoenemgratuito.com.br/download-das-provas-do-enem/', '_blank')">
                     <div class="prova-ano">2023</div>
-                    <small>PDF + Gabarito</small>
+                    <div class="prova-info">📥 PDF + Gabarito</div>
+                    <small>Curso Enem Gratuito</small>
                 </div>
-                <div class="prova-card" onclick="window.open('https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas', '_blank')">
+                <div class="prova-card" onclick="window.open('https://cursoenemgratuito.com.br/download-das-provas-do-enem/', '_blank')">
                     <div class="prova-ano">2022</div>
-                    <small>PDF + Gabarito</small>
+                    <div class="prova-info">📥 PDF + Gabarito</div>
+                    <small>Curso Enem Gratuito</small>
                 </div>
-                <div class="prova-card" onclick="window.open('https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas', '_blank')">
+                <div class="prova-card" onclick="window.open('https://poliedroresolve.sistemapoliedro.com.br/vestibulares/enem?year=2009', '_blank')">
                     <div class="prova-ano">2021</div>
-                    <small>PDF + Gabarito</small>
+                    <div class="prova-info">📥 Com resolução</div>
+                    <small>Poliedro</small>
                 </div>
-                <div class="prova-card" onclick="window.open('https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas', '_blank')">
+                <div class="prova-card" onclick="window.open('https://poliedroresolve.sistemapoliedro.com.br/vestibulares/enem?year=2009', '_blank')">
                     <div class="prova-ano">2020</div>
-                    <small>PDF + Gabarito</small>
+                    <div class="prova-info">📥 Com resolução</div>
+                    <small>Poliedro</small>
                 </div>
-                <div class="prova-card" onclick="window.open('https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas', '_blank')">
+                <div class="prova-card" onclick="window.open('https://vestibular.mundoeducacao.uol.com.br/enem/provas-gabaritos.htm', '_blank')">
                     <div class="prova-ano">2019</div>
-                    <small>PDF + Gabarito</small>
+                    <div class="prova-info">📥 PDF organizado</div>
+                    <small>Mundo Educação</small>
                 </div>
-                <div class="prova-card" onclick="window.open('https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas', '_blank')">
+                <div class="prova-card" onclick="window.open('https://vestibular.mundoeducacao.uol.com.br/enem/provas-gabaritos.htm', '_blank')">
                     <div class="prova-ano">2018</div>
-                    <small>PDF + Gabarito</small>
+                    <div class="prova-info">📥 PDF organizado</div>
+                    <small>Mundo Educação</small>
                 </div>
-                <div class="prova-card" onclick="window.open('https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas', '_blank')">
+                <div class="prova-card" onclick="window.open('https://vestibular.mundoeducacao.uol.com.br/enem/provas-gabaritos.htm', '_blank')">
                     <div class="prova-ano">2017</div>
-                    <small>PDF + Gabarito</small>
+                    <div class="prova-info">📥 PDF organizado</div>
+                    <small>Mundo Educação</small>
                 </div>
             </div>
 
-            <!-- Mapas mentais -->
+            <!-- Link adicional para todas as provas -->
+            <div style="text-align: center; margin: 20px 0 40px;">
+                <a href="https://cursoenemgratuito.com.br/download-das-provas-do-enem/" target="_blank" class="link-todas-provas">
+                    📚 ACESSAR TODAS AS PROVAS (1998 a 2025)
+                </a>
+            </div>
+
+            <!-- MAPAS MENTAIS - CORRIGIDO -->
             <section class="mapas-section" id="mapas">
                 <h2 style="color: var(--azul-marinho); font-size: 2.2rem; margin-bottom: 8px;">Mapas mentais</h2>
                 <p style="color: var(--azul-escuro); margin-bottom: 24px;">Esquemas visuais para facilitar seus estudos</p>
                 
                 <div class="mapas-grid">
-                    <div class="mapa-card" onclick="window.open('#', '_blank')">
+                    <div class="mapa-card" onclick="verificarEAbrirLink('mapas/redacao-mapa.html')">
                         <div class="mapa-icon">📝</div>
                         <h4>Redação</h4>
                         <p>Estrutura e competências</p>
                     </div>
-                    <div class="mapa-card" onclick="window.open('#', '_blank')">
+                    <div class="mapa-card" onclick="verificarEAbrirLink('mapas/matematica-mapa.html')">
                         <div class="mapa-icon">🧮</div>
                         <h4>Matemática</h4>
                         <p>Fórmulas e conceitos</p>
                     </div>
-                    <div class="mapa-card" onclick="window.open('#', '_blank')">
+                    <div class="mapa-card" onclick="verificarEAbrirLink('mapas/quimica-mapa.html')">
                         <div class="mapa-icon">🧪</div>
                         <h4>Química</h4>
                         <p>Tabela e reações</p>
                     </div>
-                    <div class="mapa-card" onclick="window.open('#', '_blank')">
+                    <div class="mapa-card" onclick="verificarEAbrirLink('mapas/fisica-mapa.html')">
                         <div class="mapa-icon">⚡</div>
                         <h4>Física</h4>
                         <p>Leis e fórmulas</p>
                     </div>
-                    <div class="mapa-card" onclick="window.open('#', '_blank')">
+                    <div class="mapa-card" onclick="verificarEAbrirLink('mapas/biologia-mapa.html')">
                         <div class="mapa-icon">🧬</div>
                         <h4>Biologia</h4>
                         <p>Genética e ecologia</p>
                     </div>
-                    <div class="mapa-card" onclick="window.open('#', '_blank')">
+                    <div class="mapa-card" onclick="verificarEAbrirLink('mapas/historia-mapa.html')">
                         <div class="mapa-icon">🏛️</div>
                         <h4>História</h4>
                         <p>Linha do tempo</p>
                     </div>
-                    <div class="mapa-card" onclick="window.open('#', '_blank')">
+                    <div class="mapa-card" onclick="verificarEAbrirLink('mapas/geografia-mapa.html')">
                         <div class="mapa-icon">🗺️</div>
                         <h4>Geografia</h4>
                         <p>Geopolítica</p>
                     </div>
-                    <div class="mapa-card" onclick="window.open('#', '_blank')">
+                    <div class="mapa-card" onclick="verificarEAbrirLink('mapas/filosofia-mapa.html')">
                         <div class="mapa-icon">💭</div>
                         <h4>Filosofia</h4>
                         <p>Pensadores</p>
@@ -1300,14 +1361,14 @@
                 <a href="https://www.youtube.com/user/stoodibr" class="link-item" target="_blank">📌 Stoodi</a>
                 <a href="https://www.khanacademy.org/" class="link-item" target="_blank">📌 Khan Academy</a>
                 <a href="https://brasilescola.uol.com.br/" class="link-item" target="_blank">📌 Brasil Escola</a>
+                <a href="https://cursoenemgratuito.com.br/" class="link-item" target="_blank">📌 Curso Enem Gratuito</a>
                 <a href="https://sisu.mec.gov.br/" class="link-item" target="_blank">📌 SISU</a>
                 <a href="https://acessounico.mec.gov.br/prouni" class="link-item" target="_blank">📌 ProUni</a>
-                <a href="https://fies.mec.gov.br/" class="link-item" target="_blank">📌 FIES</a>
             </div>
 
             <!-- Breve menção aos cursos técnicos -->
             <div style="background: var(--azul-claro); border-radius: 16px; padding: 20px; margin: 40px 0; text-align: center; border: 1px solid var(--azul-medio);">
-                <p style="color: var(--azul-marinho);">🏫 O AGV também oferece cursos técnicos: DS, BIO, ADM e PORTOS.</p>
+                <p style="color: var(--azul-marinho);">🏫 O AGV também oferece cursos técnicos: DS, BIO, ADM e PORTOS (período da manhã).</p>
             </div>
         </div>
     </main>
@@ -1337,8 +1398,8 @@
             </div>
         </div>
         <div class="copyright">
-            <p>© 2026 Colégio Estadual Alberto Gomes Veiga - Todos os direitos reservados</p>
-            <p style="margin-top: 8px;">Ensino Médio e Cursos Técnicos | Preparação para o ENEM</p>
+            <p>© 2026 Colégio Estadual Alberto Gomes Veiga - Paranaguá/PR</p>
+            <p style="margin-top: 8px;">Preparação para o ENEM - Ensino Médio e Cursos Técnicos</p>
         </div>
     </footer>
 
@@ -1352,8 +1413,27 @@
             if (logado === 'true') {
                 usuarioLogado = true;
                 document.getElementById('conteudoProtegido').style.display = 'block';
+                
+                // Mudar botão de login para logout
+                const loginContainer = document.getElementById('loginButtonContainer');
+                loginContainer.innerHTML = '<button class="btn-logout" onclick="fazerLogout()"><span>🚪</span> Sair</button>';
             }
         };
+
+        // Função para fazer logout
+        function fazerLogout() {
+            localStorage.removeItem('usuarioLogado');
+            localStorage.removeItem('userEmail');
+            usuarioLogado = false;
+            document.getElementById('conteudoProtegido').style.display = 'none';
+            
+            // Restaurar botão de login
+            const loginContainer = document.getElementById('loginButtonContainer');
+            loginContainer.innerHTML = '<button class="btn-login" onclick="window.location.href=\'login.html\'"><span>🔑</span> Entrar / Cadastrar</button>';
+            
+            // Mostrar mensagem
+            alert('Você saiu da sua conta.');
+        }
 
         // Função para verificar login antes de acessar conteúdo
         function verificarLogin(event, destino) {
@@ -1369,6 +1449,18 @@
                         elemento.scrollIntoView({ behavior: 'smooth' });
                     }
                 }
+                return true;
+            }
+        }
+
+        // Função para verificar login e abrir link
+        function verificarEAbrirLink(url) {
+            if (!usuarioLogado) {
+                document.getElementById('overlay').classList.add('show');
+                document.getElementById('loginRequired').classList.add('show');
+                return false;
+            } else {
+                window.location.href = url;
                 return true;
             }
         }
@@ -1426,6 +1518,15 @@
                 }
             });
         }
+
+        // Pausar carrossel quando a janela não está visível (economia de recursos)
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                clearInterval(autoPlayInterval);
+            } else {
+                startAutoPlay();
+            }
+        });
     </script>
 </body>
 </html>

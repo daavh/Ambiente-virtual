@@ -13,21 +13,21 @@
         }
 
         :root {
-            --azul-marinho: #0a1929;
-            --azul-escuro: #1a3a5f;
-            --azul-medio: #2b5a8c;
-            --azul-claro: #ebf5ff;
-            --branco-puro: #ffffff;
+            --cor-primaria: #b85a3a; /* Terracota */
+            --cor-secundaria: #c96b4a;
+            --cor-destaque: #d97e5d;
+            --cor-fundo: #f9ede8;
+            --branco: #ffffff;
         }
 
         body {
-            background: linear-gradient(135deg, var(--azul-marinho), var(--azul-escuro));
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
             min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -43,7 +43,8 @@
         }
 
         .header h1 {
-            color: var(--branco-puro);
+            color: var(--branco);
+            font-size: 1.8rem;
         }
 
         .header h1 span {
@@ -51,8 +52,8 @@
         }
 
         .btn-voltar {
-            background: var(--azul-claro);
-            color: var(--azul-marinho);
+            background: var(--cor-fundo);
+            color: var(--cor-primaria);
             padding: 10px 20px;
             border-radius: 40px;
             text-decoration: none;
@@ -61,45 +62,65 @@
         }
 
         .btn-voltar:hover {
-            background: var(--branco-puro);
+            background: var(--branco);
             transform: scale(1.05);
         }
 
         .mapa-container {
-            background: var(--branco-puro);
+            background: var(--branco);
             border-radius: 40px;
             padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border: 3px solid var(--cor-primaria);
         }
 
         .mapa-titulo {
             text-align: center;
-            color: var(--azul-marinho);
-            font-size: 2rem;
+            color: var(--cor-primaria);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .mapa-subtitulo {
+            text-align: center;
+            color: var(--cor-secundaria);
             margin-bottom: 40px;
+            font-size: 1.1rem;
         }
 
         .mapa-central {
-            width: 150px;
-            height: 150px;
-            background: var(--azul-marinho);
-            color: var(--branco-puro);
+            width: 180px;
+            height: 180px;
+            background: var(--cor-primaria);
+            color: var(--branco);
             border-radius: 50%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             margin: 0 auto 50px;
             font-size: 1.3rem;
             font-weight: bold;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(184, 90, 58, 0.3);
+            border: 4px solid var(--cor-fundo);
+            padding: 20px;
+        }
+
+        .mapa-central span {
+            font-size: 2rem;
+            margin-bottom: 5px;
         }
 
         .linha-tempo {
             display: flex;
             justify-content: space-between;
-            margin: 40px 0;
+            margin: 30px 0 50px;
             position: relative;
             padding: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .linha-tempo::before {
@@ -109,54 +130,84 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: var(--azul-medio);
+            background: var(--cor-primaria);
         }
 
         .periodo {
-            background: var(--azul-claro);
-            padding: 10px 20px;
+            background: var(--cor-fundo);
+            padding: 8px 15px;
             border-radius: 30px;
             position: relative;
             z-index: 1;
             font-weight: bold;
+            color: var(--cor-primaria);
+            border: 2px solid var(--cor-primaria);
         }
 
         .topicos-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 25px;
         }
 
         .topico {
-            background: var(--azul-claro);
-            border-radius: 20px;
+            background: var(--cor-fundo);
+            border-radius: 25px;
             padding: 25px;
+            border-top: 6px solid var(--cor-primaria);
+            transition: all 0.3s;
+        }
+
+        .topico:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(184, 90, 58, 0.15);
         }
 
         .topico h3 {
-            color: var(--azul-marinho);
+            color: var(--cor-primaria);
             margin-bottom: 20px;
-            font-size: 1.3rem;
-            border-bottom: 2px solid var(--azul-medio);
+            font-size: 1.4rem;
+            text-align: center;
+            border-bottom: 2px solid var(--cor-primaria);
             padding-bottom: 10px;
         }
 
-        .topico ul {
+        .conteudo {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .subtopico {
+            background: var(--branco);
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        .subtopico h4 {
+            color: var(--cor-primaria);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .subtopico ul {
             list-style: none;
         }
 
-        .topico li {
+        .subtopico li {
             margin-bottom: 8px;
-            padding-left: 15px;
+            padding-left: 20px;
             position: relative;
+            color: var(--cor-secundaria);
         }
 
-        .topico li::before {
+        .subtopico li::before {
             content: '•';
-            color: var(--azul-medio);
+            color: var(--cor-primaria);
             font-weight: bold;
             position: absolute;
             left: 0;
+            font-size: 1.2rem;
         }
     </style>
 </head>
@@ -169,8 +220,10 @@
 
         <div class="mapa-container">
             <div class="mapa-titulo">🏛️ HISTÓRIA ENEM</div>
+            <div class="mapa-subtitulo">Brasil e Geral - Principais períodos e acontecimentos</div>
 
             <div class="mapa-central">
+                <span>📜</span>
                 HISTÓRIA<br>45 QUESTÕES
             </div>
 
@@ -185,51 +238,64 @@
             <div class="topicos-grid">
                 <div class="topico">
                     <h3>🇧🇷 BRASIL COLÔNIA</h3>
-                    <ul>
-                        <li>1500 - Descobrimento</li>
-                        <li>Ciclo do Pau-Brasil</li>
-                        <li>Ciclo do Açúcar</li>
-                        <li>Escravidão</li>
-                        <li>Entradas e Bandeiras</li>
-                    </ul>
+                    <div class="conteudo">
+                        <div class="subtopico">
+                            <ul>
+                                <li>1500 - Descobrimento</li>
+                                <li>Ciclo do Pau-Brasil</li>
+                                <li>Ciclo do Açúcar</li>
+                                <li>Escravidão</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="topico">
                     <h3>👑 BRASIL IMPÉRIO</h3>
-                    <ul>
-                        <li>Independência (1822)</li>
-                        <li>Primeiro Reinado</li>
-                        <li>Período Regencial</li>
-                        <li>Segundo Reinado</li>
-                        <li>Abolição da Escravatura</li>
-                    </ul>
+                    <div class="conteudo">
+                        <div class="subtopico">
+                            <ul>
+                                <li>Independência (1822)</li>
+                                <li>Primeiro Reinado</li>
+                                <li>Segundo Reinado</li>
+                                <li>Abolição (1888)</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="topico">
                     <h3>🏛️ BRASIL REPÚBLICA</h3>
-                    <ul>
-                        <li>República Velha</li>
-                        <li>Era Vargas</li>
-                        <li>Ditadura Militar</li>
-                        <li>Nova República</li>
-                    </ul>
+                    <div class="conteudo">
+                        <div class="subtopico">
+                            <ul>
+                                <li>República Velha</li>
+                                <li>Era Vargas</li>
+                                <li>Ditadura Militar</li>
+                                <li>Nova República</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="topico">
                     <h3>🌎 HISTÓRIA GERAL</h3>
-                    <ul>
-                        <li>Revolução Francesa</li>
-                        <li>Revolução Industrial</li>
-                        <li>1ª e 2ª Guerra Mundial</li>
-                        <li>Guerra Fria</li>
-                    </ul>
+                    <div class="conteudo">
+                        <div class="subtopico">
+                            <ul>
+                                <li>Revolução Francesa</li>
+                                <li>Revolução Industrial</li>
+                                <li>1ª e 2ª Guerra Mundial</li>
+                                <li>Guerra Fria</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // VERIFICAÇÃO DE LOGIN
         window.onload = function() {
             const logado = localStorage.getItem('usuarioLogado');
             if (logado !== 'true') {

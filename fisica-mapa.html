@@ -13,21 +13,21 @@
         }
 
         :root {
-            --azul-marinho: #0a1929;
-            --azul-escuro: #1a3a5f;
-            --azul-medio: #2b5a8c;
-            --azul-claro: #ebf5ff;
-            --branco-puro: #ffffff;
+            --cor-primaria: #c45d2b; /* Laranja */
+            --cor-secundaria: #d46f3c;
+            --cor-destaque: #e58652;
+            --cor-fundo: #fff0e6;
+            --branco: #ffffff;
         }
 
         body {
-            background: linear-gradient(135deg, var(--azul-marinho), var(--azul-escuro));
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
             min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -43,7 +43,8 @@
         }
 
         .header h1 {
-            color: var(--branco-puro);
+            color: var(--branco);
+            font-size: 1.8rem;
         }
 
         .header h1 span {
@@ -51,8 +52,8 @@
         }
 
         .btn-voltar {
-            background: var(--azul-claro);
-            color: var(--azul-marinho);
+            background: var(--cor-fundo);
+            color: var(--cor-primaria);
             padding: 10px 20px;
             border-radius: 40px;
             text-decoration: none;
@@ -61,77 +62,133 @@
         }
 
         .btn-voltar:hover {
-            background: var(--branco-puro);
+            background: var(--branco);
             transform: scale(1.05);
         }
 
         .mapa-container {
-            background: var(--branco-puro);
+            background: var(--branco);
             border-radius: 40px;
             padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border: 3px solid var(--cor-primaria);
         }
 
         .mapa-titulo {
             text-align: center;
-            color: var(--azul-marinho);
-            font-size: 2rem;
+            color: var(--cor-primaria);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .mapa-subtitulo {
+            text-align: center;
+            color: var(--cor-secundaria);
             margin-bottom: 40px;
+            font-size: 1.1rem;
         }
 
         .mapa-central {
-            width: 150px;
-            height: 150px;
-            background: var(--azul-marinho);
-            color: var(--branco-puro);
+            width: 180px;
+            height: 180px;
+            background: var(--cor-primaria);
+            color: var(--branco);
             border-radius: 50%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             margin: 0 auto 50px;
             font-size: 1.3rem;
             font-weight: bold;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(196, 93, 43, 0.3);
+            border: 4px solid var(--cor-fundo);
+            padding: 20px;
+        }
+
+        .mapa-central span {
+            font-size: 2rem;
+            margin-bottom: 5px;
         }
 
         .topicos-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 25px;
         }
 
         .topico {
-            background: var(--azul-claro);
-            border-radius: 20px;
+            background: var(--cor-fundo);
+            border-radius: 25px;
             padding: 25px;
+            border-top: 6px solid var(--cor-primaria);
+            transition: all 0.3s;
+        }
+
+        .topico:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(196, 93, 43, 0.15);
         }
 
         .topico h3 {
-            color: var(--azul-marinho);
+            color: var(--cor-primaria);
             margin-bottom: 20px;
-            font-size: 1.3rem;
-            border-bottom: 2px solid var(--azul-medio);
+            font-size: 1.4rem;
+            text-align: center;
+            border-bottom: 2px solid var(--cor-primaria);
             padding-bottom: 10px;
         }
 
+        .conteudo {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
         .subtopico {
-            margin-bottom: 20px;
+            background: var(--branco);
+            border-radius: 15px;
+            padding: 15px;
         }
 
         .subtopico h4 {
-            color: var(--azul-escuro);
+            color: var(--cor-primaria);
             margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .subtopico ul {
+            list-style: none;
+        }
+
+        .subtopico li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            color: var(--cor-secundaria);
+        }
+
+        .subtopico li::before {
+            content: '•';
+            color: var(--cor-primaria);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
         }
 
         .formula {
-            background: var(--branco-puro);
+            background: #ffe0d0;
             padding: 10px;
             border-radius: 10px;
-            margin-top: 10px;
+            margin-top: 8px;
             font-family: monospace;
             font-size: 1.1rem;
             text-align: center;
-            border: 1px solid var(--azul-medio);
+            border: 1px solid var(--cor-primaria);
+            color: var(--cor-primaria);
         }
     </style>
 </head>
@@ -144,54 +201,78 @@
 
         <div class="mapa-container">
             <div class="mapa-titulo">⚡ FÍSICA ENEM</div>
+            <div class="mapa-subtitulo">Mecânica, Termologia, Eletricidade e Ondulatória</div>
 
             <div class="mapa-central">
+                <span>🔭</span>
                 FÍSICA<br>45 QUESTÕES
             </div>
 
             <div class="topicos-grid">
                 <div class="topico">
                     <h3>📐 MECÂNICA</h3>
-                    <div class="subtopico">
-                        <h4>Cinemática</h4>
-                        <div class="formula">v = v₀ + at</div>
-                        <div class="formula">s = s₀ + v₀t + at²/2</div>
+                    <div class="conteudo">
+                        <div class="subtopico">
+                            <h4>Cinemática</h4>
+                            <ul>
+                                <li>Velocidade média: v = Δs/Δt</li>
+                                <li>Aceleração: a = Δv/Δt</li>
+                                <li>MRU: s = s₀ + v·t</li>
+                                <li>MRUV: v = v₀ + a·t</li>
+                            </ul>
+                            <div class="formula">Torricelli: v² = v₀² + 2a·Δs</div>
+                        </div>
+                        <div class="subtopico">
+                            <h4>Dinâmica</h4>
+                            <ul>
+                                <li>2ª Lei de Newton: F = m·a</li>
+                                <li>Peso: P = m·g (g = 10 m/s²)</li>
+                                <li>Força de atrito: Fat = μ·N</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="subtopico">
-                        <h4>Dinâmica</h4>
-                        <div class="formula">F = m·a</div>
-                        <div class="formula">P = m·g</div>
+                </div>
+
+                <div class="topico">
+                    <h3>🌡️ TERMOLOGIA</h3>
+                    <div class="conteudo">
+                        <div class="subtopico">
+                            <h4>Calorimetria</h4>
+                            <ul>
+                                <li>Calor sensível: Q = m·c·ΔT</li>
+                                <li>Calor latente: Q = m·L</li>
+                            </ul>
+                        </div>
+                        <div class="formula">C/5 = (F-32)/9 = (K-273)/5</div>
                     </div>
                 </div>
 
                 <div class="topico">
                     <h3>💡 ELETRICIDADE</h3>
-                    <div class="formula">U = R·i (1ª Lei de Ohm)</div>
-                    <div class="formula">P = U·i</div>
-                    <div class="formula">E = P·Δt</div>
+                    <div class="conteudo">
+                        <div class="subtopico">
+                            <h4>Eletrodinâmica</h4>
+                            <div class="formula">U = R·i (1ª Lei de Ohm)</div>
+                            <div class="formula">P = U·i</div>
+                            <div class="formula">E = P·Δt</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="topico">
-                    <h3>🌡️ TERMOLOGIA</h3>
-                    <div class="formula">ΔL = L₀·α·ΔT</div>
-                    <div class="formula">Q = m·c·ΔT</div>
-                    <div class="formula">Q = m·L</div>
-                </div>
-
-                <div class="topico">
-                    <h3>👁️ ÓPTICA</h3>
-                    <ul>
-                        <li>Reflexão</li>
-                        <li>Refração</li>
-                        <li>Lentes e espelhos</li>
-                    </ul>
+                    <h3>🌊 ONDULATÓRIA</h3>
+                    <div class="conteudo">
+                        <div class="subtopico">
+                            <h4>Equação fundamental</h4>
+                            <div class="formula">v = λ·f</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // VERIFICAÇÃO DE LOGIN
         window.onload = function() {
             const logado = localStorage.getItem('usuarioLogado');
             if (logado !== 'true') {
