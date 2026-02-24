@@ -1,7 +1,6 @@
 # 🎓 AGV ENEM - Ambiente Virtual de Estudos
 
 ![AGV ENEM](https://img.shields.io/badge/AGV-ENEM%202026-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-orange)
 
 ## 📚 Sobre o Projeto
