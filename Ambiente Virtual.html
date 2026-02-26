@@ -881,7 +881,6 @@
             content: '✅';
             position: absolute;
             left: 0;
-            color: var(--verde);
         }
 
         .fontes-footer {
@@ -1169,6 +1168,47 @@
     </style>
 </head>
 <body>
+    <!-- TELA DE INTRODUÇÃO ANIMADA -->
+    <div id="intro-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0a1929, #1a3a5f); z-index: 10000; display: flex; justify-content: center; align-items: center; flex-direction: column; transition: opacity 1s ease;">
+        <div style="text-align: center; animation: fadeInUp 1.5s ease;">
+            <h1 style="font-size: 5rem; font-weight: 800; color: white; text-shadow: 0 0 20px rgba(255,255,255,0.3); margin-bottom: 20px; letter-spacing: 5px; animation: pulse 2s infinite;">
+                AGV <span style="color: #ffd700;">ENEM</span>
+            </h1>
+            <p style="font-size: 1.5rem; color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300;">
+                Colégio Alberto Gomes Veiga - Paranaguá
+            </p>
+            
+            <!-- BARRA DE CARREGAMENTO -->
+            <div style="width: 300px; height: 6px; background: rgba(255,255,255,0.2); border-radius: 10px; margin: 20px auto; overflow: hidden;">
+                <div id="loading-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffd700, #2b5a8c); border-radius: 10px; transition: width 3s ease;"></div>
+            </div>
+            
+            <p id="loading-text" style="color: white; font-size: 1rem; margin-top: 10px;">Carregando...</p>
+        </div>
+    </div>
+
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(255,255,255,0.3);
+            }
+            50% {
+                text-shadow: 0 0 40px rgba(255,215,0,0.5);
+            }
+        }
+    </style>
+
     <!-- Efeito de ondas de fundo -->
     <div class="bg-wave">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -1369,7 +1409,6 @@
                     <button class="provas-tab" onclick="mostrarAbaProvas('unespar')">UNESPAR</button>
                     <button class="provas-tab" onclick="mostrarAbaProvas('ifpr')">IFPR</button>
                     <button class="provas-tab" onclick="mostrarAbaProvas('portos')">PORTOS</button>
-                    <button class="provas-tab" onclick="mostrarAbaProvas('aulões')">Aulões</button>
                 </div>
 
                 <!-- CONTEÚDO ENEM -->
@@ -1666,84 +1705,6 @@
                     </div>
                 </div>
 
-                <!-- CONTEÚDO AULÕES -->
-                <div id="provas-auloes" class="provas-content">
-                    <div class="vestibular-header">
-                        <h3>🎯 AULÕES PREPARATÓRIOS 2026</h3>
-                        <p>Por curso e matéria</p>
-                    </div>
-                    
-                    <div class="provas-ano-grid">
-                        <!-- Aulões Gerais -->
-                        <div class="prova-ano-card">
-                            <div class="prova-ano-titulo">📝 Aulões Gerais</div>
-                            <div class="prova-links">
-                                <a href="#" onclick="alert('Link disponível em breve!'); return false;" class="prova-link">
-                                    <span>📺</span> 15/03 - Redação - Estrutura e Competências
-                                </a>
-                                <a href="#" onclick="alert('Link disponível em breve!'); return false;" class="prova-link">
-                                    <span>📺</span> 22/03 - Matemática - Geometria
-                                </a>
-                                <a href="#" onclick="alert('Link disponível em breve!'); return false;" class="prova-link">
-                                    <span>📺</span> 29/03 - Ciências Humanas
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Aulões DS -->
-                        <div class="prova-ano-card">
-                            <div class="prova-ano-titulo">💻 Técnico em DS</div>
-                            <div class="prova-links">
-                                <a href="#" onclick="alert('Link disponível em breve!'); return false;" class="prova-link">
-                                    <span>📺</span> 12/04 - Lógica de Programação
-                                </a>
-                                <a href="#" onclick="alert('Link disponível em breve!'); return false;" class="prova-link">
-                                    <span>📺</span> 19/04 - Matemática Aplicada
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Aulões BIO -->
-                        <div class="prova-ano-card">
-                            <div class="prova-ano-titulo">🧬 Técnico em BIO</div>
-                            <div class="prova-links">
-                                <a href="#" onclick="alert('Link disponível em breve!'); return false;" class="prova-link">
-                                    <span>📺</span> 12/04 - Biotecnologia e Genética
-                                </a>
-                                <a href="#" onclick="alert('Link disponível em breve!'); return false;" class="prova-link">
-                                    <span>📺</span> 19/04 - Ecologia
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Aulões ADM -->
-                        <div class="prova-ano-card">
-                            <div class="prova-ano-titulo">📊 Técnico em ADM</div>
-                            <div class="prova-links">
-                                <a href="#" onclick="alert('Link disponível em breve!'); return false;" class="prova-link">
-                                    <span>📺</span> 12/04 - Matemática Financeira
-                                </a>
-                                <a href="#" onclick="alert('Link disponível em breve!'); return false;" class="prova-link">
-                                    <span>📺</span> 19/04 - Atualidades Econômicas
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Aulões PORTOS -->
-                        <div class="prova-ano-card">
-                            <div class="prova-ano-titulo">🚢 Técnico em PORTOS</div>
-                            <div class="prova-links">
-                                <a href="#" onclick="alert('Link disponível em breve!'); return false;" class="prova-link">
-                                    <span>📺</span> 12/04 - Geografia dos Portos
-                                </a>
-                                <a href="#" onclick="alert('Link disponível em breve!'); return false;" class="prova-link">
-                                    <span>📺</span> 19/04 - Logística e Comércio Exterior
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- DICAS DE ESTUDO POR CURSO -->
                 <div class="dicas-box">
                     <h4>📌 Dicas de Estudo por Curso</h4>
@@ -1798,7 +1759,7 @@
                 </div>
             </div>
 
-            <!-- MAPAS MENTAIS -->
+            <!-- MAPAS MENTAIS - AGORA COM 10 MAPAS (INCLUINDO SOCIOLOGIA E INGLÊS) -->
             <section class="mapas-section" id="mapas">
                 <h2 style="color: var(--azul-marinho); font-size: 2.2rem; margin-bottom: 8px;">Mapas mentais</h2>
                 <p style="color: var(--azul-escuro); margin-bottom: 24px;">Esquemas visuais para facilitar seus estudos</p>
@@ -1843,6 +1804,17 @@
                         <div class="mapa-icon">💭</div>
                         <h4>Filosofia</h4>
                         <p>Pensadores</p>
+                    </div>
+                    <!-- NOVOS MAPAS: Sociologia e Inglês -->
+                    <div class="mapa-card" onclick="verificarEAbrirLink('mapas/sociologia-mapa.html')">
+                        <div class="mapa-icon">👥</div>
+                        <h4>Sociologia</h4>
+                        <p>Autores e conceitos</p>
+                    </div>
+                    <div class="mapa-card" onclick="verificarEAbrirLink('mapas/ingles-mapa.html')">
+                        <div class="mapa-icon">🇬🇧</div>
+                        <h4>Inglês</h4>
+                        <p>Interpretação e gramática</p>
                     </div>
                 </div>
             </section>
@@ -1919,6 +1891,35 @@
     </footer>
 
     <script>
+        // Controlar a tela de introdução
+        window.addEventListener('load', function() {
+            const introScreen = document.getElementById('intro-screen');
+            const loadingBar = document.getElementById('loading-bar');
+            const loadingText = document.getElementById('loading-text');
+            
+            // Animar a barra de carregamento
+            setTimeout(() => {
+                loadingBar.style.width = '100%';
+            }, 100);
+            
+            // Atualizar texto
+            setTimeout(() => {
+                loadingText.textContent = 'Preparando ambiente...';
+            }, 1000);
+            
+            setTimeout(() => {
+                loadingText.textContent = 'Quase lá...';
+            }, 2000);
+            
+            // Esconder a tela de introdução
+            setTimeout(() => {
+                introScreen.style.opacity = '0';
+                setTimeout(() => {
+                    introScreen.style.display = 'none';
+                }, 1000);
+            }, 3000);
+        });
+
         // Variável para controlar se o usuário está logado
         let usuarioLogado = false;
 

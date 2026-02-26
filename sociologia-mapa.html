@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Mental - Sociologia - AGV ENEM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --cor-primaria: #ff7f50; /* Coral */
+            --cor-secundaria: #ff9f7a;
+            --cor-destaque: #e6734c;
+            --cor-fundo: #fff0e6;
+            --branco: #ffffff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: var(--branco);
+            font-size: 1.8rem;
+        }
+
+        .header h1 span {
+            color: #ffd700;
+        }
+
+        .btn-voltar {
+            background: var(--cor-fundo);
+            color: var(--cor-primaria);
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: var(--branco);
+            transform: scale(1.05);
+        }
+
+        .mapa-container {
+            background: var(--branco);
+            border-radius: 40px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border: 3px solid var(--cor-primaria);
+        }
+
+        .mapa-titulo {
+            text-align: center;
+            color: var(--cor-primaria);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .mapa-subtitulo {
+            text-align: center;
+            color: var(--cor-secundaria);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .mapa-central {
+            width: 180px;
+            height: 180px;
+            background: var(--cor-primaria);
+            color: var(--branco);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(255, 127, 80, 0.3);
+            border: 4px solid var(--cor-fundo);
+            padding: 20px;
+        }
+
+        .mapa-central span {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .topicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .topico {
+            background: var(--cor-fundo);
+            border-radius: 25px;
+            padding: 25px;
+            border-top: 6px solid var(--cor-primaria);
+            transition: all 0.3s;
+        }
+
+        .topico:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 127, 80, 0.15);
+        }
+
+        .topico h3 {
+            color: var(--cor-primaria);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            text-align: center;
+            border-bottom: 2px solid var(--cor-primaria);
+            padding-bottom: 10px;
+        }
+
+        .conteudo {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .subtopico {
+            background: var(--branco);
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        .subtopico h4 {
+            color: var(--cor-primaria);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .subtopico ul {
+            list-style: none;
+        }
+
+        .subtopico li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            color: #444;
+        }
+
+        .subtopico li::before {
+            content: '•';
+            color: var(--cor-primaria);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .pensador {
+            font-weight: bold;
+            color: var(--cor-primaria);
+        }
+
+        .citacao {
+            font-style: italic;
+            background: #ffe8dd;
+            padding: 8px 12px;
+            border-radius: 10px;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--cor-primaria);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AGV <span>ENEM</span> - Mapa Mental: Sociologia</h1>
+            <a href="../Ambiente Virtual.html" class="btn-voltar">← Voltar</a>
+        </div>
+
+        <div class="mapa-container">
+            <div class="mapa-titulo">👥 SOCIOLOGIA ENEM</div>
+            <div class="mapa-subtitulo">Principais autores, conceitos e correntes sociológicas</div>
+
+            <div class="mapa-central">
+                <span>🌍</span>
+                SOCIOLOGIA
+            </div>
+
+            <div class="topicos-grid">
+                <div class="topico">
+                    <h3>🏛️ CLÁSSICOS DA SOCIOLOGIA</h3>
+                    <div class="conteudo">
+                        <div class="subtopico">
+                            <h4>Émile Durkheim</h4>
+                            <ul>
+                                <li><span class="pensador">Fato Social:</span> maneiras de agir, pensar e sentir que exercem coerção social</li>
+                                <li><span class="pensador">Solidariedade Mecânica:</span> sociedades primitivas</li>
+                                <li><span class="pensador">Solidariedade Orgânica:</span> sociedades modernas</li>
+                                <li><span class="pensador">Anomia:</span> ausência de regras sociais</li>
+                            </ul>
+                        </div>
+                        <div class="subtopico">
+                            <h4>Karl Marx</h4>
+                            <ul>
+                                <li><span class="pensador">Luta de classes:</span> burguesia x proletariado</li>
+                                <li><span class="pensador">Mais-valia:</span> trabalho não pago</li>
+                                <li><span class="pensador">Alienação:</span> trabalhador separado do produto</li>
+                                <li><span class="pensador">Infraestrutura x Superestrutura</span></li>
+                            </ul>
+                            <div class="citacao">"A história da sociedade até hoje é a história da luta de classes."</div>
+                        </div>
+                        <div class="subtopico">
+                            <h4>Max Weber</h4>
+                            <ul>
+                                <li><span class="pensador">Ação Social:</span> ação com sentido para o indivíduo</li>
+                                <li><span class="pensador">Tipos ideais:</span> construção teórica</li>
+                                <li><span class="pensador">Ética protestante e espírito do capitalismo</span></li>
+                                <li><span class="pensador">Racionalização da sociedade</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topico">
+                    <h3>🔍 CONCEITOS FUNDAMENTAIS</h3>
+                    <div class="conteudo">
+                        <div class="subtopico">
+                            <h4>Estratificação Social</h4>
+                            <ul>
+                                <li>Classes sociais (Marx)</li>
+                                <li>Estamentos (sociedade feudal)</li>
+                                <li>Castas (Índia)</li>
+                                <li>Mobilidade social</li>
+                            </ul>
+                        </div>
+                        <div class="subtopico">
+                            <h4>Cultura e Sociedade</h4>
+                            <ul>
+                                <li>Cultura de massa</li>
+                                <li>Indústria cultural (Adorno)</li>
+                                <li>Cultura erudita x popular</li>
+                                <li>Etnocentrismo</li>
+                            </ul>
+                        </div>
+                        <div class="subtopico">
+                            <h4>Poder e Política</h4>
+                            <ul>
+                                <li>Poder simbólico (Bourdieu)</li>
+                                <li>Dominação legítima (Weber)</li>
+                                <li>Estado e governo</li>
+                                <li>Cidadania e direitos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topico">
+                    <h3>🌎 SOCIOLOGIA CONTEMPORÂNEA</h3>
+                    <div class="conteudo">
+                        <div class="subtopico">
+                            <h4>Pierre Bourdieu</h4>
+                            <ul>
+                                <li><span class="pensador">Capital cultural, econômico e social</span></li>
+                                <li><span class="pensador">Habitus:</span> disposições incorporadas</li>
+                                <li><span class="pensador">Campo social:</span> espaço de disputas</li>
+                                <li><span class="pensador">Violência simbólica</span></li>
+                            </ul>
+                        </div>
+                        <div class="subtopico">
+                            <h4>Zygmunt Bauman</h4>
+                            <ul>
+                                <li><span class="pensador">Modernidade líquida:</span> fluidez das relações</li>
+                                <li><span class="pensador">Amor líquido:</span> relações descartáveis</li>
+                                <li><span class="pensador">Sociedade de consumo</span></li>
+                            </ul>
+                            <div class="citacao">"Vivemos em tempos líquidos. Nada é feito para durar."</div>
+                        </div>
+                        <div class="subtopico">
+                            <h4>Michel Foucault</h4>
+                            <ul>
+                                <li><span class="pensador">Poder disciplinar:</span> controle dos corpos</li>
+                                <li><span class="pensador">Biopoder:</span> controle da população</li>
+                                <li><span class="pensador">Vigiar e Punir</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topico">
+                    <h3>📌 TEMAS ATUAIS</h3>
+                    <div class="conteudo">
+                        <div class="subtopico">
+                            <h4>Movimentos Sociais</h4>
+                            <ul>
+                                <li>Feminismo e gênero</li>
+                                <li>Movimento negro e antirracismo</li>
+                                <li>LGBTQIA+</li>
+                                <li>Ambientalismo</li>
+                            </ul>
+                        </div>
+                        <div class="subtopico">
+                            <h4>Globalização</h4>
+                            <ul>
+                                <li>Homogeneização cultural</li>
+                                <li>Desigualdade mundial</li>
+                                <li>Migrações e xenofobia</li>
+                                <li>Redes sociais e tecnologia</li>
+                            </ul>
+                        </div>
+                        <div class="subtopico">
+                            <h4>Desigualdade no Brasil</h4>
+                            <ul>
+                                <li>Concentração de renda</li>
+                                <li>Racismo estrutural</li>
+                                <li>Acesso à educação</li>
+                                <li>Violência e segurança</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const logado = localStorage.getItem('usuarioLogado');
+            if (logado !== 'true') {
+                window.location.href = '../login.html';
+            }
+        };
+    </script>
+</body>
+</html>
