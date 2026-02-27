@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ENEM 2024 - Simulado Completo - AGV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --azul-marinho: #0a1929;
+            --azul-escuro: #1a3a5f;
+            --azul-medio: #2b5a8c;
+            --azul-claro: #ebf5ff;
+            --branco: #ffffff;
+            --vermelho: #dc3545;
+            --verde: #28a745;
+            --amarelo: #ffc107;
+            --cinza: #6c757d;
+        }
+
+        /* SISTEMA ANTI-COLA */
+        .bloqueio-aviso {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 41, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 999999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .bloqueio-aviso.active {
+            display: flex;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .bloqueio-aviso h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--vermelho);
+        }
+
+        .bloqueio-aviso p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .bloqueio-aviso button {
+            background: var(--amarelo);
+            color: var(--azul-marinho);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid var(--branco);
+        }
+
+        .bloqueio-aviso button:hover {
+            transform: scale(1.05);
+            background: #ffd700;
+        }
+
+        /* HEADER DO SIMULADO */
+        .simulado-header {
+            background: var(--azul-marinho);
+            color: var(--branco);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-bottom: 3px solid var(--amarelo);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-area img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--branco);
+            padding: 3px;
+            border: 2px solid var(--amarelo);
+        }
+
+        .logo-area h1 {
+            font-size: 1.5rem;
+        }
+
+        .logo-area span {
+            color: var(--amarelo);
+        }
+
+        .timer-area {
+            background: var(--azul-escuro);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+            border: 2px solid var(--amarelo);
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .timer-area.warning {
+            background: var(--vermelho);
+            color: white;
+            animation: warning 1s infinite;
+        }
+
+        @keyframes warning {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .progresso-area {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 1rem;
+        }
+
+        /* CONTEÚDO DO SIMULADO */
+        .simulado-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 25px;
+        }
+
+        /* ÁREA DAS QUESTÕES */
+        .questoes-area {
+            background: var(--branco);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .materia-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: var(--azul-claro);
+            padding: 5px;
+            border-radius: 50px;
+            overflow-x: auto;
+        }
+
+        .materia-tab {
+            padding: 12px 25px;
+            border: none;
+            background: transparent;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--azul-marinho);
+            white-space: nowrap;
+        }
+
+        .materia-tab.active {
+            background: var(--azul-marinho);
+            color: var(--branco);
+        }
+
+        .materia-tab:hover:not(.active) {
+            background: rgba(10,25,41,0.1);
+        }
+
+        /* QUESTÃO INDIVIDUAL */
+        .questao-card {
+            background: var(--branco);
+            border: 2px solid var(--azul-claro);
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .questao-card:hover {
+            border-color: var(--azul-medio);
+            box-shadow: 0 10px 25px rgba(43,90,140,0.1);
+        }
+
+        .questao-card.respondida {
+            border-left: 10px solid var(--verde);
+            background: #f8fff8;
+        }
+
+        .questao-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--azul-claro);
+        }
+
+        .questao-numero {
+            background: var(--azul-marinho);
+            color: var(--branco);
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .questao-materia {
+            background: var(--azul-claro);
+            color: var(--azul-marinho);
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .questao-enunciado {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .questao-enunciado img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin: 15px 0;
+        }
+
+        .alternativas {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .alternativa {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: var(--azul-claro);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .alternativa:hover {
+            background: #d4e3f0;
+            transform: translateX(5px);
+        }
+
+        .alternativa.selected {
+            background: var(--azul-medio);
+            color: var(--branco);
+            border-color: var(--azul-marinho);
+        }
+
+        .alternativa.selected .alternativa-letra {
+            background: var(--branco);
+            color: var(--azul-marinho);
+        }
+
+        .alternativa-letra {
+            width: 40px;
+            height: 40px;
+            background: var(--branco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--azul-marinho);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .alternativa-texto {
+            flex: 1;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* BARRA LATERAL */
+        .sidebar {
+            background: var(--branco);
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, var(--azul-marinho), var(--azul-escuro));
+            color: var(--branco);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .navegador-questoes {
+            background: var(--azul-claro);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .navegador-questoes h4 {
+            color: var(--azul-marinho);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .botoes-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .btn-questao {
+            aspect-ratio: 1;
+            background: var(--branco);
+            border: 2px solid var(--azul-medio);
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--azul-marinho);
+        }
+
+        .btn-questao:hover {
+            background: var(--azul-medio);
+            color: var(--branco);
+        }
+
+        .btn-questao.respondida {
+            background: var(--verde);
+            color: white;
+            border-color: var(--verde);
+        }
+
+        .btn-questao.atual {
+            background: var(--azul-marinho);
+            color: white;
+            border-color: var(--amarelo);
+            transform: scale(1.05);
+        }
+
+        .btn-finalizar {
+            width: 100%;
+            padding: 18px;
+            background: var(--verde);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-finalizar:hover {
+            background: #218838;
+            transform: scale(1.02);
+        }
+
+        .btn-finalizar:disabled {
+            background: var(--cinza);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* MODAL DE FINALIZAÇÃO */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--branco);
+            border-radius: 40px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-content h2 {
+            color: var(--azul-marinho);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .resumo-stats {
+            background: var(--azul-claro);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--azul-marinho);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-modal {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-modal.confirm {
+            background: var(--verde);
+            color: white;
+        }
+
+        .btn-modal.cancel {
+            background: var(--cinza);
+            color: white;
+        }
+
+        .btn-modal:hover {
+            transform: scale(1.05);
+        }
+
+        /* MODAL DE RESULTADO */
+        .resultado-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .resultado-modal.active {
+            display: flex;
+        }
+
+        .resultado-content {
+            background: var(--branco);
+            border-radius: 50px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .resultado-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .resultado-header h2 {
+            color: var(--azul-marinho);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .resultado-header p {
+            color: var(--verde);
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .nota-final {
+            background: linear-gradient(135deg, var(--azul-marinho), var(--azul-escuro));
+            color: white;
+            padding: 30px;
+            border-radius: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .nota-final .nota {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .nota-final .acertos {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .gabaritos-liberados {
+            background: var(--amarelo);
+            color: var(--azul-marinho);
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .btn-voltar {
+            background: var(--azul-marinho);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn-voltar:hover {
+            background: var(--azul-escuro);
+            transform: scale(1.02);
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 1024px) {
+            .simulado-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .timer-area {
+                font-size: 1.5rem;
+            }
+            
+            .botoes-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SISTEMA ANTI-COLA -->
+    <div class="bloqueio-aviso" id="bloqueioAviso">
+        <h2>🚫 ATENÇÃO!</h2>
+        <p>Você tentou sair da página do simulado. Isso é considerado COLA e resultará na perda de pontos!</p>
+        <p id="contadorRegressivo">Retornando em 5 segundos...</p>
+        <button onclick="fecharAvisoBloqueio()">Voltar ao Simulado</button>
+    </div>
+
+    <!-- MODAL DE FINALIZAÇÃO -->
+    <div class="modal" id="modalFinalizar">
+        <div class="modal-content">
+            <h2>📝 Finalizar Simulado?</h2>
+            <p>Tem certeza que deseja entregar o simulado?</p>
+            
+            <div class="resumo-stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="modalRespondidas">0</div>
+                    <div class="stat-label">Respondidas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="modalNaoRespondidas">90</div>
+                    <div class="stat-label">Não respondidas</div>
+                </div>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="btn-modal confirm" onclick="finalizarSimulado()">✅ Confirmar</button>
+                <button class="btn-modal cancel" onclick="fecharModal()">❌ Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE RESULTADO -->
+    <div class="resultado-modal" id="resultadoModal">
+        <div class="resultado-content">
+            <div class="resultado-header">
+                <h2>🎉 SIMULADO CONCLUÍDO!</h2>
+                <p>ENEM 2024 - Completo</p>
+            </div>
+            
+            <div class="nota-final">
+                <div class="nota" id="notaFinal">0</div>
+                <div class="acertos" id="acertosFinal">0 de 90 questões</div>
+            </div>
+            
+            <div class="gabaritos-liberados" id="gabaritosLiberados">
+                ✅ Gabaritos liberados para download!
+            </div>
+            
+            <div style="margin: 30px 0;">
+                <h3 style="color: var(--azul-marinho); margin-bottom: 20px;">📊 Desempenho por Matéria</h3>
+                <div id="desempenhoMaterias"></div>
+            </div>
+            
+            <button class="btn-voltar" onclick="voltarAoAmbiente()">⬅️ Voltar ao Ambiente Virtual</button>
+        </div>
+    </div>
+
+    <!-- HEADER DO SIMULADO -->
+    <header class="simulado-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <img src="Logo_agv-removebg-preview.png" alt="AGV Logo">
+                <h1>AGV <span>ENEM</span> 2024</h1>
+            </div>
+            <div class="timer-area" id="timer">05:30:00</div>
+            <div class="progresso-area" id="progresso">0/90 respondidas</div>
+        </div>
+    </header>
+
+    <main class="simulado-container">
+        <!-- ÁREA DAS QUESTÕES -->
+        <div class="questoes-area">
+            <div class="materia-tabs" id="materiaTabs">
+                <button class="materia-tab active" onclick="mudarMateria('linguagens')">📝 Linguagens</button>
+                <button class="materia-tab" onclick="mudarMateria('humanas')">🌍 Humanas</button>
+                <button class="materia-tab" onclick="mudarMateria('matematica')">🧮 Matemática</button>
+                <button class="materia-tab" onclick="mudarMateria('natureza')">🔬 Natureza</button>
+                <button class="materia-tab" onclick="mudarMateria('redacao')">✍️ Redação</button>
+            </div>
+
+            <div id="questoesContainer">
+                <!-- As questões serão inseridas via JavaScript -->
+            </div>
+        </div>
+
+        <!-- BARRA LATERAL -->
+        <div class="sidebar">
+            <div class="info-card">
+                <h3>ENEM 2024</h3>
+                <p>📅 1º e 2º Dia</p>
+                <p>⏱️ 90 questões</p>
+                <p>✍️ Redação</p>
+            </div>
+
+            <div class="navegador-questoes">
+                <h4>Navegação Rápida</h4>
+                <div class="botoes-grid" id="navegadorBotoes">
+                    <!-- Botões serão gerados via JS -->
+                </div>
+            </div>
+
+            <button class="btn-finalizar" onclick="abrirModalFinalizar()" id="btnFinalizar">
+                📤 Finalizar Simulado
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // ============================================
+        // DADOS DO SIMULADO - BASEADO NO ENEM 2024
+        // ============================================
+        const questoes = [
+            // LINGUAGENS (1-45) - ENEM 2024
+            {
+                id: 1,
+                numero: 1,
+                materia: 'linguagens',
+                enunciado: 'Leia o trecho do poema "O operário em construção", de Vinicius de Moraes:\n\n"E o operário ouviu a voz\nDe todos os seus irmãos\nOs seus irmãos que morreram\nPor outros que viverão\nUma esperança sincrescer\nE na sua voz também\nVeio o operário que ouviu\nA sua própria voz\nE aquela construção\nSubiu, subiu, subiu..."\n\nNo poema, a construção mencionada metaforicamente representa:',
+                alternativas: [
+                    'A) O crescimento da indústria nacional.',
+                    'B) A ascensão social do trabalhador.',
+                    'C) A construção da conscientização de classe.',
+                    'D) O desenvolvimento urbano das cidades.',
+                    'E) A edificação de moradias populares.'
+                ],
+                correta: 2 // C
+            },
+            {
+                id: 2,
+                numero: 2,
+                materia: 'linguagens',
+                enunciado: 'Leia a charge abaixo:\n\n[IMAGEM: Charge sobre redes sociais]\n\nA crítica presente na charge refere-se:',
+                alternativas: [
+                    'A) Ao excesso de informações falsas na internet.',
+                    'B) À superficialidade das relações virtuais.',
+                    'C) Ao vício em jogos eletrônicos.',
+                    'D) À falta de acesso à tecnologia.',
+                    'E) Ao isolamento social durante a pandemia.'
+                ],
+                correta: 1 // B
+            },
+            {
+                id: 3,
+                numero: 3,
+                materia: 'linguagens',
+                enunciado: 'Na tirinha da Mafalda, a personagem questiona: "Parem o mundo que eu quero descer!". O efeito de humor é construído principalmente:',
+                alternativas: [
+                    'A) Pelo nonsense da situação.',
+                    'B) Pela crítica política implícita.',
+                    'C) Pela personificação do mundo.',
+                    'D) Pela ironia em relação à sociedade.',
+                    'E) Pelo exagero da expressão coloquial.'
+                ],
+                correta: 4 // E
+            },
+            // Adicionar até 45 questões de linguagens...
+
+            // HUMANAS (46-90) - ENEM 2024
+            {
+                id: 46,
+                numero: 46,
+                materia: 'humanas',
+                enunciado: 'A Constituição de 1988, conhecida como "Constituição Cidadã", representou um marco na redemocratização do Brasil. Entre seus princípios fundamentais, destaca-se:',
+                alternativas: [
+                    'A) A centralização do poder no Executivo.',
+                    'B) A garantia de direitos sociais e individuais.',
+                    'C) A censura prévia à imprensa.',
+                    'D) O fortalecimento do regime militar.',
+                    'E) A restrição ao voto dos analfabetos.'
+                ],
+                correta: 1 // B
+            },
+            {
+                id: 47,
+                numero: 47,
+                materia: 'humanas',
+                enunciado: 'Observe o climograma abaixo:\n\n[IMAGEM: Climograma de cidade brasileira]\n\nO climograma apresentado é característico da região:',
+                alternativas: [
+                    'A) Norte, com clima equatorial quente e úmido.',
+                    'B) Nordeste, com clima semiárido.',
+                    'C) Centro-Oeste, com clima tropical típico.',
+                    'D) Sudeste, com clima tropical de altitude.',
+                    'E) Sul, com clima subtropical.'
+                ],
+                correta: 2 // C
+            },
+            {
+                id: 48,
+                numero: 48,
+                materia: 'humanas',
+                enunciado: 'A filosofia de René Descartes, que afirmava "Penso, logo existo", inaugurou na filosofia moderna:',
+                alternativas: [
+                    'A) O empirismo, baseado na experiência sensorial.',
+                    'B) O racionalismo, baseado na razão como fonte do conhecimento.',
+                    'C) O ceticismo, duvidando de todo conhecimento.',
+                    'D) O materialismo, reduzindo tudo à matéria.',
+                    'E) O idealismo, priorizando as ideias sobre a realidade.'
+                ],
+                correta: 1 // B
+            },
+            // Adicionar até 90 questões...
+
+            // MATEMÁTICA (91-135) - ENEM 2024
+            {
+                id: 91,
+                numero: 91,
+                materia: 'matematica',
+                enunciado: 'Uma pessoa investiu R$ 5.000,00 em um fundo que rende juros compostos de 1% ao mês. Após 6 meses, o montante aproximado será de:',
+                alternativas: [
+                    'A) R$ 5.300,00',
+                    'B) R$ 5.305,00',
+                    'C) R$ 5.308,00',
+                    'D) R$ 5.310,00',
+                    'E) R$ 5.315,00'
+                ],
+                correta: 2 // C (cálculo: 5000 * 1,01^6 ≈ 5308)
+            },
+            {
+                id: 92,
+                numero: 92,
+                materia: 'matematica',
+                enunciado: 'Em uma pesquisa, 60% dos entrevistados preferem o produto A, 30% preferem o produto B e 10% não opinaram. Se 200 pessoas foram entrevistadas, quantas preferem o produto A?',
+                alternativas: [
+                    'A) 60',
+                    'B) 80',
+                    'C) 100',
+                    'D) 120',
+                    'E) 140'
+                ],
+                correta: 3 // D (200 * 0,6 = 120)
+            },
+            {
+                id: 93,
+                numero: 93,
+                materia: 'matematica',
+                enunciado: 'A área de um círculo de raio 5 cm é, aproximadamente: (use π = 3,14)',
+                alternativas: [
+                    'A) 31,4 cm²',
+                    'B) 62,8 cm²',
+                    'C) 78,5 cm²',
+                    'D) 157 cm²',
+                    'E) 314 cm²'
+                ],
+                correta: 2 // C (πr² = 3,14 * 25 = 78,5)
+            },
+            // Adicionar até 135 questões...
+
+            // NATUREZA (136-180) - ENEM 2024
+            {
+                id: 136,
+                numero: 136,
+                materia: 'natureza',
+                enunciado: 'Na fotossíntese, as plantas convertem energia luminosa em energia química. O gás liberado nesse processo é:',
+                alternativas: [
+                    'A) Gás carbônico (CO₂)',
+                    'B) Oxigênio (O₂)',
+                    'C) Nitrogênio (N₂)',
+                    'D) Metano (CH₄)',
+                    'E) Hidrogênio (H₂)'
+                ],
+                correta: 1 // B
+            },
+            {
+                id: 137,
+                numero: 137,
+                materia: 'natureza',
+                enunciado: 'Um carro de massa 1000 kg está a 72 km/h. Sua energia cinética é de:',
+                alternativas: [
+                    'A) 100.000 J',
+                    'B) 200.000 J',
+                    'C) 300.000 J',
+                    'D) 400.000 J',
+                    'E) 500.000 J'
+                ],
+                correta: 1 // B (72 km/h = 20 m/s; Ec = mv²/2 = 1000*400/2 = 200.000 J)
+            },
+            {
+                id: 138,
+                numero: 138,
+                materia: 'natureza',
+                enunciado: 'Na tabela periódica, os elementos do grupo 18 (gases nobres) são caracterizados por:',
+                alternativas: [
+                    'A) Alta reatividade química.',
+                    'B) Baixa eletronegatividade.',
+                    'C) Camada de valência completa.',
+                    'D) Facilidade em formar cátions.',
+                    'E) Tendência a formar ligações iônicas.'
+                ],
+                correta: 2 // C
+            },
+            // Adicionar até 180 questões...
+        ];
+
+        // ============================================
+        // VARIÁVEIS GLOBAIS
+        // ============================================
+        let respostas = new Array(180).fill(null);
+        let tempoRestante = 5 * 3600 + 30 * 60; // 5h30 em segundos
+        let timerInterval;
+        let materiaAtual = 'linguagens';
+        let simuladoFinalizado = false;
+
+        // ============================================
+        // SISTEMA ANTI-COLA
+        // ============================================
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden && !simuladoFinalizado) {
+                document.getElementById('bloqueioAviso').classList.add('active');
+                let contador = 5;
+                const contadorEl = document.getElementById('contadorRegressivo');
+                
+                const intervalo = setInterval(() => {
+                    contador--;
+                    contadorEl.textContent = `Retornando em ${contador} segundos...`;
+                    
+                    if (contador <= 0) {
+                        clearInterval(intervalo);
+                        registrarTentativaCola();
+                    }
+                }, 1000);
+            }
+        });
+
+        window.addEventListener('blur', function() {
+            if (!simuladoFinalizado) {
+                document.getElementById('bloqueioAviso').classList.add('active');
+            }
+        });
+
+        function fecharAvisoBloqueio() {
+            document.getElementById('bloqueioAviso').classList.remove('active');
+        }
+
+        function registrarTentativaCola() {
+            // Registrar que o aluno tentou colar (pode descontar pontos)
+            alert('⚠️ TENTATIVA DE COLA REGISTRADA!');
+            fecharAvisoBloqueio();
+        }
+
+        // ============================================
+        // TIMER
+        // ============================================
+        function iniciarTimer() {
+            timerInterval = setInterval(() => {
+                if (simuladoFinalizado) return;
+                
+                tempoRestante--;
+                
+                if (tempoRestante <= 0) {
+                    clearInterval(timerInterval);
+                    alert('⏰ TEMPO ESGOTADO! Finalizando simulado...');
+                    finalizarSimulado();
+                }
+                
+                atualizarTimer();
+                
+                // Alerta de 30 minutos restantes
+                if (tempoRestante === 1800) {
+                    alert('⚠️ 30 MINUTOS RESTANTES!');
+                    document.getElementById('timer').classList.add('warning');
+                }
+                
+                // Alerta de 10 minutos
+                if (tempoRestante === 600) {
+                    alert('⚠️⚠️ 10 MINUTOS RESTANTES!');
+                }
+                
+                // Alerta de 5 minutos
+                if (tempoRestante === 300) {
+                    alert('⚠️⚠️⚠️ 5 MINUTOS RESTANTES!');
+                }
+            }, 1000);
+        }
+
+        function atualizarTimer() {
+            const horas = Math.floor(tempoRestante / 3600);
+            const minutos = Math.floor((tempoRestante % 3600) / 60);
+            const segundos = tempoRestante % 60;
+            
+            document.getElementById('timer').textContent = 
+                `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        }
+
+        // ============================================
+        // RENDERIZAR QUESTÕES
+        // ============================================
+        function renderizarQuestoes() {
+            const container = document.getElementById('questoesContainer');
+            
+            // Filtrar questões pela matéria atual e faixa de números
+            let questoesFiltradas = [];
+            
+            if (materiaAtual === 'linguagens') {
+                questoesFiltradas = questoes.filter(q => q.id >= 1 && q.id <= 45);
+            } else if (materiaAtual === 'humanas') {
+                questoesFiltradas = questoes.filter(q => q.id >= 46 && q.id <= 90);
+            } else if (materiaAtual === 'matematica') {
+                questoesFiltradas = questoes.filter(q => q.id >= 91 && q.id <= 135);
+            } else if (materiaAtual === 'natureza') {
+                questoesFiltradas = questoes.filter(q => q.id >= 136 && q.id <= 180);
+            }
+            
+            if (materiaAtual === 'redacao') {
+                container.innerHTML = `
+                    <div class="questao-card">
+                        <div class="questao-header">
+                            <span class="questao-numero">REDAÇÃO</span>
+                            <span class="questao-materia">Proposta</span>
+                        </div>
+                        <div class="questao-enunciado">
+                            <h3 style="color: var(--azul-marinho); margin-bottom: 20px;">TEXTO I</h3>
+                            <p>O trabalho análogo à escravidão ainda é uma realidade no Brasil. Segundo dados do Ministério do Trabalho, mais de 2.000 trabalhadores foram resgatados em condições degradantes em 2023.</p>
+                            
+                            <h3 style="color: var(--azul-marinho); margin: 20px 0;">TEXTO II</h3>
+                            <p>A Organização Internacional do Trabalho (OIT) estima que cerca de 50 milhões de pessoas no mundo vivem em situação de escravidão moderna.</p>
+                            
+                            <h3 style="color: var(--azul-marinho); margin: 20px 0;">TEXTO III</h3>
+                            <p>"Ninguém será submetido a escravidão ou servidão" - Declaração Universal dos Direitos Humanos, Art. 4°.</p>
+                            
+                            <h3 style="color: var(--azul-marinho); margin: 30px 0 15px;">PROPOSTA DE REDAÇÃO</h3>
+                            <p style="font-weight: bold;">A partir da leitura dos textos motivadores e com base nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema:</p>
+                            
+                            <p style="font-size: 1.3rem; font-weight: 800; color: var(--azul-marinho); margin: 20px 0; text-align: center;">
+                                "O TRABALHO ANÁLOGO À ESCRAVIDÃO NO BRASIL CONTEMPORÂNEO: CAUSAS E CAMINHOS PARA A ERRADICAÇÃO"
+                            </p>
+                            
+                            <p>Selecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defesa de seu ponto de vista.</p>
+                            
+                            <div style="background: var(--azul-claro); border-radius: 15px; padding: 20px; margin-top: 20px;">
+                                <p><strong>Instruções:</strong></p>
+                                <ul style="margin-left: 20px;">
+                                    <li>O texto deve ter entre 7 e 30 linhas</li>
+                                    <li>Utilize a modalidade formal da língua portuguesa</li>
+                                    <li>Não copie os textos motivadores</li>
+                                    <li>Apresente proposta de intervenção que respeite os direitos humanos</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <textarea placeholder="Escreva sua redação aqui..." style="width: 100%; min-height: 300px; padding: 15px; border-radius: 15px; border: 2px solid var(--azul-claro); font-family: inherit; resize: vertical;"></textarea>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            questoesFiltradas.forEach(questao => {
+                const respondida = respostas[questao.id - 1] !== null;
+                html += `
+                    <div class="questao-card ${respondida ? 'respondida' : ''}" id="questao-${questao.id}">
+                        <div class="questao-header">
+                            <span class="questao-numero">Questão ${questao.numero}</span>
+                            <span class="questao-materia">${questao.materia === 'linguagens' ? '📝 Linguagens' : 
+                                questao.materia === 'humanas' ? '🌍 Humanas' : 
+                                questao.materia === 'matematica' ? '🧮 Matemática' : '🔬 Natureza'}</span>
+                        </div>
+                        <div class="questao-enunciado">
+                            ${questao.enunciado.replace(/\n/g, '<br>')}
+                        </div>
+                        <div class="alternativas">
+                            ${questao.alternativas.map((alt, index) => `
+                                <div class="alternativa ${respostas[questao.id - 1] === index ? 'selected' : ''}" 
+                                     onclick="selecionarAlternativa(${questao.id}, ${index})">
+                                    <div class="alternativa-letra">${String.fromCharCode(65 + index)}</div>
+                                    <div class="alternativa-texto">${alt}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            atualizarNavegador();
+        }
+
+        // ============================================
+        // FUNÇÕES DE INTERAÇÃO
+        // ============================================
+        function selecionarAlternativa(questaoId, alternativaIndex) {
+            if (simuladoFinalizado) return;
+            
+            respostas[questaoId - 1] = alternativaIndex;
+            renderizarQuestoes();
+            atualizarProgresso();
+        }
+
+        function mudarMateria(materia) {
+            materiaAtual = materia;
+            
+            // Atualizar tabs
+            document.querySelectorAll('.materia-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderizarQuestoes();
+        }
+
+        function atualizarProgresso() {
+            const respondidas = respostas.filter(r => r !== null).length;
+            document.getElementById('progresso').textContent = `${respondidas}/180 respondidas`;
+        }
+
+        function atualizarNavegador() {
+            const navegador = document.getElementById('navegadorBotoes');
+            let botoes = '';
+            
+            for (let i = 1; i <= 180; i++) {
+                const respondida = respostas[i-1] !== null;
+                
+                botoes += `
+                    <button class="btn-questao ${respondida ? 'respondida' : ''}" 
+                            onclick="irParaQuestao(${i})">
+                        ${i}
+                    </button>
+                `;
+            }
+            
+            navegador.innerHTML = botoes;
+        }
+
+        function irParaQuestao(numero) {
+            // Determinar matéria com base no número
+            if (numero <= 45) {
+                materiaAtual = 'linguagens';
+            } else if (numero <= 90) {
+                materiaAtual = 'humanas';
+            } else if (numero <= 135) {
+                materiaAtual = 'matematica';
+            } else {
+                materiaAtual = 'natureza';
+            }
+            
+            renderizarQuestoes();
+            
+            // Scroll até a questão
+            setTimeout(() => {
+                document.getElementById(`questao-${numero}`)?.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        // ============================================
+        // FINALIZAÇÃO
+        // ============================================
+        function abrirModalFinalizar() {
+            const respondidas = respostas.filter(r => r !== null).length;
+            document.getElementById('modalRespondidas').textContent = respondidas;
+            document.getElementById('modalNaoRespondidas').textContent = 180 - respondidas;
+            document.getElementById('modalFinalizar').classList.add('active');
+        }
+
+        function fecharModal() {
+            document.getElementById('modalFinalizar').classList.remove('active');
+        }
+
+        function finalizarSimulado() {
+            simuladoFinalizado = true;
+            clearInterval(timerInterval);
+            
+            // Calcular acertos
+            let acertos = 0;
+            questoes.forEach(q => {
+                if (respostas[q.id - 1] === q.correta) {
+                    acertos++;
+                }
+            });
+            
+            // Calcular nota (aproximada) - ENEM tem 180 questões
+            const nota = Math.round((acertos / 180) * 1000);
+            
+            // Atualizar resultado
+            document.getElementById('notaFinal').textContent = nota;
+            document.getElementById('acertosFinal').textContent = `${acertos} de 180 questões`;
+            
+            // Mostrar desempenho por matéria
+            const materias = [
+                { nome: 'linguagens', label: '📝 Linguagens', inicio: 1, fim: 45 },
+                { nome: 'humanas', label: '🌍 Humanas', inicio: 46, fim: 90 },
+                { nome: 'matematica', label: '🧮 Matemática', inicio: 91, fim: 135 },
+                { nome: 'natureza', label: '🔬 Natureza', inicio: 136, fim: 180 }
+            ];
+            
+            let desempenhoHtml = '';
+            
+            materias.forEach(materia => {
+                const questoesMateria = questoes.filter(q => q.id >= materia.inicio && q.id <= materia.fim);
+                const acertosMateria = questoesMateria.filter(q => respostas[q.id - 1] === q.correta).length;
+                const percentual = Math.round((acertosMateria / questoesMateria.length) * 100);
+                
+                desempenhoHtml += `
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>${materia.label}</span>
+                            <span>${acertosMateria}/${questoesMateria.length} (${percentual}%)</span>
+                        </div>
+                        <div style="width: 100%; height: 10px; background: var(--azul-claro); border-radius: 5px;">
+                            <div style="width: ${percentual}%; height: 100%; background: var(--azul-medio); border-radius: 5px;"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('desempenhoMaterias').innerHTML = desempenhoHtml;
+            
+            // Liberar gabaritos
+            const anosConcluidos = JSON.parse(localStorage.getItem('simuladosConcluidos')) || [];
+            if (!anosConcluidos.includes(2024)) {
+                anosConcluidos.push(2024);
+                localStorage.setItem('simuladosConcluidos', JSON.stringify(anosConcluidos));
+            }
+            
+            // Fechar modais
+            document.getElementById('modalFinalizar').classList.remove('active');
+            document.getElementById('resultadoModal').classList.add('active');
+        }
+
+        function voltarAoAmbiente() {
+            window.location.href = 'Ambiente Virtual.html';
+        }
+
+        // ============================================
+        // INICIALIZAÇÃO
+        // ============================================
+        window.onload = function() {
+            const logado = localStorage.getItem('usuarioLogado');
+            if (logado !== 'true') {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            renderizarQuestoes();
+            iniciarTimer();
+            atualizarProgresso();
+        };
+    </script>
+</body>
+</html>
